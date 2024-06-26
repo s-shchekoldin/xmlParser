@@ -1,0 +1,291 @@
+===Stage1 - full request:===
+getAttribute(recipe): name->bread
+getAttribute(recipe): preptime->5
+getAttribute(recipe): cooktime->180
+	DATA(12)[1_1]: Simple bread
+finishTag: title deep: 1
+getAttribute(ingredient): amount->3
+getAttribute(ingredient): unit->cup
+	DATA(5)[1_1]: flour
+finishTag: ingredient deep: 1
+getAttribute(ingredient): amount->0.25
+getAttribute(ingredient): unit->gram
+	DATA(5)[1_1]: yeast
+finishTag: ingredient deep: 1
+getAttribute(ingredient): amount->1.5
+getAttribute(ingredient): unit->cup
+	DATA(10)[1_1]: warm water
+finishTag: ingredient deep: 1
+getAttribute(ingredient): amount->1
+getAttribute(ingredient): unit->tea spoon
+	DATA(4)[1_1]: salt
+finishTag: ingredient deep: 1
+	DATA(24)[1_1]: !!!here can be text!!!  
+	DATA(51)[1_1]: Mix all ingredients together and knead thoroughly..
+finishTag: step deep: 2
+	DATA(57)[1_1]: Cover with a cloth and leave in a warm room for one hour.
+finishTag: step deep: 2
+	DATA(61)[1_1]: Knead again, place on a baking sheet, and put it in the oven.
+finishTag: step deep: 2
+finishTag: instructions deep: 1
+finishTag: recipe deep: 0
+===Stage2 - data fragmentation 1 byte===
+getAttribute(recipe): name->bread
+getAttribute(recipe): preptime->5
+getAttribute(recipe): cooktime->180
+	DATA(1)[1_0]: S
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: m
+	DATA(1)[0_0]: p
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: b
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: d
+	DATA(0)[0_1]: 
+finishTag: title deep: 1
+getAttribute(ingredient): amount->3
+getAttribute(ingredient): unit->cup
+	DATA(1)[1_0]: f
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: u
+	DATA(1)[0_0]: r
+	DATA(0)[0_1]: 
+finishTag: ingredient deep: 1
+getAttribute(ingredient): amount->0.25
+getAttribute(ingredient): unit->gram
+	DATA(1)[1_0]: y
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: s
+	DATA(1)[0_0]: t
+	DATA(0)[0_1]: 
+finishTag: ingredient deep: 1
+getAttribute(ingredient): amount->1.5
+getAttribute(ingredient): unit->cup
+	DATA(1)[1_0]: w
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: m
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: w
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: r
+	DATA(0)[0_1]: 
+finishTag: ingredient deep: 1
+getAttribute(ingredient): amount->1
+getAttribute(ingredient): unit->tea spoon
+	DATA(1)[1_0]: s
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: t
+	DATA(0)[0_1]: 
+finishTag: ingredient deep: 1
+	DATA(1)[1_0]: !
+	DATA(1)[0_0]: !
+	DATA(1)[0_0]: !
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: c
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: b
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: x
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: !
+	DATA(1)[0_0]: !
+	DATA(1)[0_0]: !
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]:  
+	DATA(0)[0_1]: 
+	DATA(1)[1_0]: M
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: x
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: g
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: d
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: s
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: g
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: d
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: k
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: d
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: u
+	DATA(1)[0_0]: g
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: y
+	DATA(1)[0_0]: .
+	DATA(1)[0_0]: .
+	DATA(0)[0_1]: 
+finishTag: step deep: 2
+	DATA(1)[1_0]: C
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: v
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: w
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: c
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: d
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: v
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: w
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: m
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: m
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: f
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: u
+	DATA(1)[0_0]: r
+	DATA(1)[0_0]: .
+	DATA(0)[0_1]: 
+finishTag: step deep: 2
+	DATA(1)[1_0]: K
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: d
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: g
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: ,
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: p
+	DATA(1)[0_0]: l
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: c
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: b
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: k
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: g
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: s
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: ,
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: a
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: d
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: p
+	DATA(1)[0_0]: u
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: i
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: t
+	DATA(1)[0_0]: h
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]: o
+	DATA(1)[0_0]: v
+	DATA(1)[0_0]: e
+	DATA(1)[0_0]: n
+	DATA(1)[0_0]: .
+	DATA(0)[0_1]: 
+finishTag: step deep: 2
+finishTag: instructions deep: 1
+finishTag: recipe deep: 0
