@@ -1,4 +1,4 @@
-===Stage1 - full request:===
+===Test1 - full request:===
 getAttribute(recipe): name->bread
 getAttribute(recipe): preptime->5
 getAttribute(recipe): cooktime->180
@@ -20,7 +20,8 @@ getAttribute(ingredient): amount->1
 getAttribute(ingredient): unit->tea spoon
 	DATA(4)[1_1]: salt
 finishTag: ingredient deep: 1
-	DATA(24)[1_1]: !!!here can be text!!!  
+	DATA(27)[1_1]: !!!here can be text!!!
+    
 	DATA(51)[1_1]: Mix all ingredients together and knead thoroughly..
 finishTag: step deep: 2
 	DATA(57)[1_1]: Cover with a cloth and leave in a warm room for one hour.
@@ -29,7 +30,7 @@ finishTag: step deep: 2
 finishTag: step deep: 2
 finishTag: instructions deep: 1
 finishTag: recipe deep: 0
-===Stage2 - data fragmentation 1 byte===
+===Test2 - data fragmentation 1 byte===
 getAttribute(recipe): name->bread
 getAttribute(recipe): preptime->5
 getAttribute(recipe): cooktime->180
@@ -109,6 +110,10 @@ finishTag: ingredient deep: 1
 	DATA(1)[0_0]: !
 	DATA(1)[0_0]: !
 	DATA(1)[0_0]: !
+	DATA(1)[0_0]: 
+
+	DATA(1)[0_0]:  
+	DATA(1)[0_0]:  
 	DATA(1)[0_0]:  
 	DATA(1)[0_0]:  
 	DATA(0)[0_1]: 

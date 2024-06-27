@@ -1,0 +1,14 @@
+<recipe name="bread" preptime="5" cooktime="180">
+    <title>Simple bread</title>
+    <ingredient amount="3" unit="cup">flour</ingredient>
+    <ingredient amount="0.25" unit="gram">yeast</ingredient>
+    <ingredient amount="1.5" unit="cup">warm water</ingredient>
+    <ingredient amount="1" unit="tea spoon">salt</ingredient>
+    !!!here can be text!!!
+    <instructions>
+        <step>Mix all ingredients together and knead thoroughly..</step>
+        <step>Cover with a cloth and leave in a warm room for one hour.</step>
+        <!-- <step>Read yesterday's newspaper.</step> - this is a questionable move.... -->
+        <step>Knead again, place on a baking sheet, and put it in the oven.</step>
+    </instructions>
+</recipe>

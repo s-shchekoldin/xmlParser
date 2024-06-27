@@ -1,4 +1,5 @@
 #include "xml.h"
+#include <fstream>
 
 void xmlResult::payload(__attribute__((unused)) const char * data, __attribute__((unused)) unsigned len, __attribute__((unused)) bool isFirst, __attribute__((unused)) bool isLast)
 {
@@ -20,39 +21,18 @@ void xmlResult::getAttribute()
 
 int main()
 {
-    std::vector<std::string> examples;
-    std::string s;
-    s += "<recipe name=\"bread\" preptime=\"5\" cooktime=\"180\">";
-    s += "  <title>Simple bread</title>";
-    s += "  <ingredient amount=\"3\" unit=\"cup\">flour</ingredient>";
-    s += "  <ingredient amount=\"0.25\" unit=\"gram\">yeast</ingredient>";
-    s += "  <ingredient amount=\"1.5\" unit=\"cup\">warm water</ingredient>";
-    s += "  <ingredient amount=\"1\" unit=\"tea spoon\">salt</ingredient>";
-    s += "  !!!here can be text!!!";
-    s += "  <instructions>";
-    s += "   <step>Mix all ingredients together and knead thoroughly..</step>";
-    s += "   <step>Cover with a cloth and leave in a warm room for one hour.</step>";
-    s += "   <!-- <step>Read yesterday's newspaper.</step> - this is a questionable move.... -->";
-    s += "   <step>Knead again, place on a baking sheet, and put it in the oven.</step>";
-    s += "  </instructions>";
-    s += "</recipe>";
-
-    examples.push_back(s);
+    std::ifstream f("input.txt");
+    std::string input((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
 
     xml state;
 
-    printf("===Stage1 - full request:===\n");
-    for(const auto & e : examples)
-        if (!state.parse(e))
-            printf("Error parse\n");
+    printf("===Test1 - full request:===\n");
+    state.parse(input);
 
-    printf("===Stage2 - data fragmentation 1 byte===\n");
-    for(const auto & e : examples)
-    {
-        for(const auto & c : e)
-            if (!state.parse(&c, 1))
-                printf("Error parse\n");
-    }
+    printf("===Test2 - data fragmentation 1 byte===\n");
+    for(const auto & c : input)
+        if (!state.parse(&c, 1))
+            printf("Error parse\n");
 
     return 0;
 }
