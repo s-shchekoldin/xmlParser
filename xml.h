@@ -3,7 +3,10 @@
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
+#ifndef XML_H
+#define XML_H
 #pragma once
+
 #include <string>
 #include <vector>
 #include <cstdint>
@@ -28,7 +31,7 @@ struct xml : xmlResult
     bool empty() const { return mainState.node == node_t::NO_STATE; }
 
 private:
-    enum node_t
+    enum class node_t
     {
         LOOP_1_0, // line_1
             LABEL_1_0, LOOP_1_1,
@@ -118,3 +121,4 @@ private:
     bool uint_17_0(state_t & state);
     void _uint_17_0(const char * data, unsigned len, bool isFirst);
 };
+#endif
