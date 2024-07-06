@@ -167,13 +167,13 @@ inline bool xml::range_2_0(state_t & state)
             continue;
         }
         state.data += exitCount;
-        state.eatSymCount += unsigned(state.data - beginData);
-        state.node = (state.eatSymCount >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
+        state.consumed += unsigned(state.data - beginData);
+        state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_1_1);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_2_0;
     return true;
 }
@@ -231,13 +231,13 @@ inline bool xml::range_3_0(state_t & state)
             continue;
         }
         state.data += exitCount;
-        state.eatSymCount += unsigned(state.data - beginData);
-        state.node = (state.eatSymCount >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
+        state.consumed += unsigned(state.data - beginData);
+        state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_1_1);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_3_0;
     return true;
 }
@@ -248,15 +248,15 @@ inline bool xml::text_4_0(state_t & state)
     for(; state.data < state.end; state.data++)
     {
         uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.eatSymCount++] != sym)
+        if (text[state.consumed++] != sym)
         {
             state.node = node_t::NO_STATE;
             return false;
         }
-        else if (state.eatSymCount >= sizeof(text))
+        else if (state.consumed >= sizeof(text))
         {
             state.data++;
-            state.eatSymCount = 0;
+            state.consumed = 0;
             state.node = node_t::GOTO_4_1;
             return true;
         }
@@ -298,7 +298,7 @@ inline bool xml::range_5_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x3c]
-    bool isFirstData = !state.eatSymCount;
+    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end)
     {
@@ -334,13 +334,13 @@ inline bool xml::range_5_0(state_t & state)
         }
         state.data += exitCount;
         xmlResult::payload(beginData, unsigned(state.data - beginData), isFirstData, true);
-        state.eatSymCount += unsigned(state.data - beginData);
-        state.node = (state.eatSymCount >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
+        state.consumed += unsigned(state.data - beginData);
+        state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_1_1);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
         xmlResult::payload(beginData, unsigned(state.data - beginData), isFirstData, false);
     state.node = node_t::RANGE_5_0;
@@ -382,17 +382,17 @@ inline bool xml::text_8_0(state_t & state, bool isCaseCall)
     for(; state.data < state.end; state.data++)
     {
         uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.eatSymCount++] != sym)
+        if (text[state.consumed++] != sym)
         {
             state.node = node_t::NO_STATE;
-            bool ret = isCaseCall && state.eatSymCount > 1;
-            state.eatSymCount = 0;
+            bool ret = isCaseCall && state.consumed > 1;
+            state.consumed = 0;
             return ret;
         }
-        else if (state.eatSymCount >= sizeof(text))
+        else if (state.consumed >= sizeof(text))
         {
             state.data++;
-            state.eatSymCount = 0;
+            state.consumed = 0;
             state.node = node_t::LOOP_8_1;
             return true;
         }
@@ -412,17 +412,17 @@ inline bool xml::text_9_0(state_t & state, bool isCaseCall)
     for(; state.data < state.end; state.data++)
     {
         uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.eatSymCount++] != sym)
+        if (text[state.consumed++] != sym)
         {
             state.node = node_t::RANGE_10_0;
-            bool ret = isCaseCall && state.eatSymCount > 1;
-            state.eatSymCount = 0;
+            bool ret = isCaseCall && state.consumed > 1;
+            state.consumed = 0;
             return ret;
         }
-        else if (state.eatSymCount >= sizeof(text))
+        else if (state.consumed >= sizeof(text))
         {
             state.data++;
-            state.eatSymCount = 0;
+            state.consumed = 0;
             state.node = node_t::RET_9_1;
             return true;
         }
@@ -492,10 +492,10 @@ inline bool xml::range_10_0(state_t & state)
         state.data += exitCount;
         state.node = node_t::LOOP_8_1;
         bool ret = (state.node == node_t::LOOP_8_1);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_10_0;
     return true;
 }
@@ -506,15 +506,15 @@ inline bool xml::text_11_0(state_t & state)
     for(; state.data < state.end; state.data++)
     {
         uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.eatSymCount++] != sym)
+        if (text[state.consumed++] != sym)
         {
             state.node = node_t::NO_STATE;
             return false;
         }
-        else if (state.eatSymCount >= sizeof(text))
+        else if (state.consumed >= sizeof(text))
         {
             state.data++;
-            state.eatSymCount = 0;
+            state.consumed = 0;
             state.node = node_t::STRING_11_1;
             return true;
         }
@@ -551,7 +551,7 @@ inline bool xml::string_11_1(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x3e]
-    bool isFirstData = !state.eatSymCount;
+    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end)
     {
@@ -587,13 +587,13 @@ inline bool xml::string_11_1(state_t & state)
         }
         state.data += exitCount;
         _string_11_1(beginData, unsigned(state.data - beginData), isFirstData);
-        state.eatSymCount += unsigned(state.data - beginData);
-        state.node = (state.eatSymCount >= 1) ? node_t::RANGE_11_2 : node_t::NO_STATE;
+        state.consumed += unsigned(state.data - beginData);
+        state.node = (state.consumed >= 1) ? node_t::RANGE_11_2 : node_t::NO_STATE;
         bool ret = (state.node == node_t::RANGE_11_2);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
         _string_11_1(beginData, unsigned(state.data - beginData), isFirstData);
     state.node = node_t::STRING_11_1;
@@ -626,10 +626,10 @@ inline bool xml::range_11_2(state_t & state)
             if (exitSym[uint8_t(state.data[i])])
             {
                 state.data += i;
-                state.eatSymCount += i;
-                state.node = (state.eatSymCount >= 1) ? node_t::FUNC_11_3 : node_t::NO_STATE;
+                state.consumed += i;
+                state.node = (state.consumed >= 1) ? node_t::FUNC_11_3 : node_t::NO_STATE;
                 bool ret = (state.node == node_t::FUNC_11_3);
-                state.eatSymCount = 0;
+                state.consumed = 0;
                 return ret;
             }
         state.data += stateDataCount;
@@ -693,7 +693,7 @@ inline bool xml::string_12_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x9][0x20][0x3e]
-    bool isFirstData = !state.eatSymCount;
+    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end)
     {
@@ -729,13 +729,13 @@ inline bool xml::string_12_0(state_t & state)
         }
         state.data += exitCount;
         _string_12_0(beginData, unsigned(state.data - beginData), isFirstData);
-        state.eatSymCount += unsigned(state.data - beginData);
-        state.node = (state.eatSymCount >= 1) ? node_t::FUNC_12_1 : node_t::NO_STATE;
+        state.consumed += unsigned(state.data - beginData);
+        state.node = (state.consumed >= 1) ? node_t::FUNC_12_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::FUNC_12_1);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
         _string_12_0(beginData, unsigned(state.data - beginData), isFirstData);
     state.node = node_t::STRING_12_0;
@@ -809,10 +809,10 @@ inline bool xml::range_12_2(state_t & state)
         state.data += exitCount;
         state.node = node_t::LOOP_12_3;
         bool ret = (state.node == node_t::LOOP_12_3);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_12_2;
     return true;
 }
@@ -841,15 +841,15 @@ inline bool xml::text_13_0(state_t & state)
     for(; state.data < state.end; state.data++)
     {
         uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.eatSymCount++] != sym)
+        if (text[state.consumed++] != sym)
         {
             state.node = node_t::NO_STATE;
             return false;
         }
-        else if (state.eatSymCount >= sizeof(text))
+        else if (state.consumed >= sizeof(text))
         {
             state.data++;
-            state.eatSymCount = 0;
+            state.consumed = 0;
             state.node = node_t::RET_13_1;
             return true;
         }
@@ -890,10 +890,10 @@ inline bool xml::range_14_0(state_t & state)
             if (exitSym[uint8_t(state.data[i])])
             {
                 state.data += i;
-                state.eatSymCount += i;
-                state.node = (state.eatSymCount >= 1) ? node_t::TEXT_14_1 : node_t::NO_STATE;
+                state.consumed += i;
+                state.node = (state.consumed >= 1) ? node_t::TEXT_14_1 : node_t::NO_STATE;
                 bool ret = (state.node == node_t::TEXT_14_1);
-                state.eatSymCount = 0;
+                state.consumed = 0;
                 return ret;
             }
         state.data += stateDataCount;
@@ -910,15 +910,15 @@ inline bool xml::text_14_1(state_t & state)
     for(; state.data < state.end; state.data++)
     {
         uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.eatSymCount++] != sym)
+        if (text[state.consumed++] != sym)
         {
             state.node = node_t::NO_STATE;
             return false;
         }
-        else if (state.eatSymCount >= sizeof(text))
+        else if (state.consumed >= sizeof(text))
         {
             state.data++;
-            state.eatSymCount = 0;
+            state.consumed = 0;
             state.node = node_t::FUNC_14_2;
             return true;
         }
@@ -980,7 +980,7 @@ inline bool xml::string_15_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x9][0x20][0x3d]
-    bool isFirstData = !state.eatSymCount;
+    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end)
     {
@@ -1016,13 +1016,13 @@ inline bool xml::string_15_0(state_t & state)
         }
         state.data += exitCount;
         _string_15_0(beginData, unsigned(state.data - beginData), isFirstData);
-        state.eatSymCount += unsigned(state.data - beginData);
-        state.node = (state.eatSymCount >= 1) ? node_t::RANGE_15_1 : node_t::NO_STATE;
+        state.consumed += unsigned(state.data - beginData);
+        state.node = (state.consumed >= 1) ? node_t::RANGE_15_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::RANGE_15_1);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
         _string_15_0(beginData, unsigned(state.data - beginData), isFirstData);
     state.node = node_t::STRING_15_0;
@@ -1084,10 +1084,10 @@ inline bool xml::range_15_1(state_t & state)
         state.data += exitCount;
         state.node = node_t::TEXT_15_2;
         bool ret = (state.node == node_t::TEXT_15_2);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_1;
     return true;
 }
@@ -1098,15 +1098,15 @@ inline bool xml::text_15_2(state_t & state)
     for(; state.data < state.end; state.data++)
     {
         uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.eatSymCount++] != sym)
+        if (text[state.consumed++] != sym)
         {
             state.node = node_t::NO_STATE;
             return false;
         }
-        else if (state.eatSymCount >= sizeof(text))
+        else if (state.consumed >= sizeof(text))
         {
             state.data++;
-            state.eatSymCount = 0;
+            state.consumed = 0;
             state.node = node_t::RANGE_15_3;
             return true;
         }
@@ -1170,10 +1170,10 @@ inline bool xml::range_15_3(state_t & state)
         state.data += exitCount;
         state.node = node_t::RANGE_15_4;
         bool ret = (state.node == node_t::RANGE_15_4);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_3;
     return true;
 }
@@ -1204,10 +1204,10 @@ inline bool xml::range_15_4(state_t & state)
             if (exitSym[uint8_t(state.data[i])])
             {
                 state.data += i;
-                state.eatSymCount += i;
-                state.node = (state.eatSymCount >= 1) ? node_t::STRING_15_5 : node_t::NO_STATE;
+                state.consumed += i;
+                state.node = (state.consumed >= 1) ? node_t::STRING_15_5 : node_t::NO_STATE;
                 bool ret = (state.node == node_t::STRING_15_5);
-                state.eatSymCount = 0;
+                state.consumed = 0;
                 return ret;
             }
         state.data += stateDataCount;
@@ -1246,7 +1246,7 @@ inline bool xml::string_15_5(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x22][0x27]
-    bool isFirstData = !state.eatSymCount;
+    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end)
     {
@@ -1284,10 +1284,10 @@ inline bool xml::string_15_5(state_t & state)
         _string_15_5(beginData, unsigned(state.data - beginData), isFirstData);
         state.node = node_t::RANGE_15_6;
         bool ret = (state.node == node_t::RANGE_15_6);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
         _string_15_5(beginData, unsigned(state.data - beginData), isFirstData);
     state.node = node_t::STRING_15_5;
@@ -1320,10 +1320,10 @@ inline bool xml::range_15_6(state_t & state)
             if (exitSym[uint8_t(state.data[i])])
             {
                 state.data += i;
-                state.eatSymCount += i;
-                state.node = (state.eatSymCount >= 1) ? node_t::NOTIFY_15_7 : node_t::NO_STATE;
+                state.consumed += i;
+                state.node = (state.consumed >= 1) ? node_t::NOTIFY_15_7 : node_t::NO_STATE;
                 bool ret = (state.node == node_t::NOTIFY_15_7);
-                state.eatSymCount = 0;
+                state.consumed = 0;
                 return ret;
             }
         state.data += stateDataCount;
@@ -1396,10 +1396,10 @@ inline bool xml::range_15_8(state_t & state)
         state.data += exitCount;
         state.node = node_t::LOOP_12_3;
         bool ret = (state.node == node_t::LOOP_12_3);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_8;
     return true;
 }
@@ -1436,7 +1436,7 @@ inline bool xml::uint_17_0(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0-9]
-    bool isFirstData = !state.eatSymCount;
+    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end)
     {
@@ -1472,13 +1472,13 @@ inline bool xml::uint_17_0(state_t & state)
         }
         state.data += exitCount;
         _uint_17_0(beginData, unsigned(state.data - beginData), isFirstData);
-        state.eatSymCount += unsigned(state.data - beginData);
-        state.node = (state.eatSymCount >= 1) ? node_t::LOOP_17_0 : node_t::NO_STATE;
+        state.consumed += unsigned(state.data - beginData);
+        state.node = (state.consumed >= 1) ? node_t::LOOP_17_0 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_17_0);
-        state.eatSymCount = 0;
+        state.consumed = 0;
         return ret;
     }
-    state.eatSymCount += unsigned(state.data - beginData);
+    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
         _uint_17_0(beginData, unsigned(state.data - beginData), isFirstData);
     state.node = node_t::UINT_17_0;

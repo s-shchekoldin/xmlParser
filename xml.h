@@ -58,7 +58,7 @@ private:
     {
         const char * data = nullptr;
         const char * end = nullptr;
-        uint64_t eatSymCount = 0;
+        uint64_t consumed = 0;
         node_t node = node_t::LOOP_1_0;
         unsigned retStackCount = 0;
         node_t retStack[2];
