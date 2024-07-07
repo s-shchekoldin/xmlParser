@@ -250,8 +250,8 @@ inline bool xml::text_4_0(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
-            state.consumed = 0;
             state.node = node_t::NO_STATE;
+            state.consumed = 0;
             return false;
         }
         else if (state.consumed >= sizeof(text))
@@ -385,7 +385,6 @@ inline bool xml::text_8_0(state_t & state, bool isCaseCall)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
-            state.consumed = 0;
             state.node = node_t::NO_STATE;
             bool ret = isCaseCall && state.consumed > 1;
             state.consumed = 0;
@@ -416,7 +415,6 @@ inline bool xml::text_9_0(state_t & state, bool isCaseCall)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
-            state.consumed = 0;
             state.node = node_t::RANGE_10_0;
             bool ret = isCaseCall && state.consumed > 1;
             state.consumed = 0;
@@ -511,8 +509,8 @@ inline bool xml::text_11_0(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
-            state.consumed = 0;
             state.node = node_t::NO_STATE;
+            state.consumed = 0;
             return false;
         }
         else if (state.consumed >= sizeof(text))
@@ -847,8 +845,8 @@ inline bool xml::text_13_0(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
-            state.consumed = 0;
             state.node = node_t::NO_STATE;
+            state.consumed = 0;
             return false;
         }
         else if (state.consumed >= sizeof(text))
@@ -917,8 +915,8 @@ inline bool xml::text_14_1(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
-            state.consumed = 0;
             state.node = node_t::NO_STATE;
+            state.consumed = 0;
             return false;
         }
         else if (state.consumed >= sizeof(text))
@@ -1106,8 +1104,8 @@ inline bool xml::text_15_2(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
-            state.consumed = 0;
             state.node = node_t::NO_STATE;
+            state.consumed = 0;
             return false;
         }
         else if (state.consumed >= sizeof(text))
