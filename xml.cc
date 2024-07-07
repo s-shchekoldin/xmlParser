@@ -23,46 +23,46 @@ inline void xml::parse(state_t & state)
         switch(state.node)
         {
             case node_t::LOOP_1_0: loop_1_0(state); break;
-            case node_t::LABEL_1_0: label_1_0(state); break;
+            case node_t::LABEL_1_0: if (!label_1_0(state) || state.node != node_t::LOOP_1_1) break; __attribute__ ((fallthrough));
             case node_t::LOOP_1_1: loop_1_1(state); break;
             case node_t::RANGE_2_0: range_2_0(state); break;
             case node_t::RANGE_3_0: range_3_0(state); break;
-            case node_t::TEXT_4_0: text_4_0(state); break;
+            case node_t::TEXT_4_0: if (!text_4_0(state) || state.node != node_t::GOTO_4_1) break; __attribute__ ((fallthrough));
             case node_t::GOTO_4_1: goto_4_1(state); break;
             case node_t::RANGE_5_0: range_5_0(state); break;
             case node_t::LOOP_7_0: loop_7_0(state); break;
-            case node_t::LABEL_7_0: label_7_0(state); break;
+            case node_t::LABEL_7_0: if (!label_7_0(state) || state.node != node_t::LOOP_7_1) break; __attribute__ ((fallthrough));
             case node_t::LOOP_7_1: loop_7_1(state); break;
-            case node_t::TEXT_8_0: text_8_0(state, false); break;
+            case node_t::TEXT_8_0: if (!text_8_0(state, false) || state.node != node_t::LOOP_8_1) break; __attribute__ ((fallthrough));
             case node_t::LOOP_8_1: loop_8_1(state); break;
-            case node_t::TEXT_9_0: text_9_0(state, false); break;
+            case node_t::TEXT_9_0: if (!text_9_0(state, false) || state.node != node_t::RET_9_1) break; __attribute__ ((fallthrough));
             case node_t::RET_9_1: ret_9_1(state); break;
             case node_t::RANGE_10_0: range_10_0(state); break;
-            case node_t::TEXT_11_0: text_11_0(state); break;
-            case node_t::STRING_11_1: string_11_1(state); break;
-            case node_t::RANGE_11_2: range_11_2(state); break;
-            case node_t::FUNC_11_3: func_11_3(state); break;
-            case node_t::NOTIFY_11_4: notify_11_4(state); break;
+            case node_t::TEXT_11_0: if (!text_11_0(state) || state.node != node_t::STRING_11_1) break; __attribute__ ((fallthrough));
+            case node_t::STRING_11_1: if (!string_11_1(state) || state.node != node_t::RANGE_11_2) break; __attribute__ ((fallthrough));
+            case node_t::RANGE_11_2: if (!range_11_2(state) || state.node != node_t::FUNC_11_3) break; __attribute__ ((fallthrough));
+            case node_t::FUNC_11_3: if (!func_11_3(state) || state.node != node_t::NOTIFY_11_4) break; __attribute__ ((fallthrough));
+            case node_t::NOTIFY_11_4: if (!notify_11_4(state) || state.node != node_t::RET_11_5) break; __attribute__ ((fallthrough));
             case node_t::RET_11_5: ret_11_5(state); break;
-            case node_t::STRING_12_0: string_12_0(state); break;
-            case node_t::FUNC_12_1: func_12_1(state); break;
-            case node_t::RANGE_12_2: range_12_2(state); break;
+            case node_t::STRING_12_0: if (!string_12_0(state) || state.node != node_t::FUNC_12_1) break; __attribute__ ((fallthrough));
+            case node_t::FUNC_12_1: if (!func_12_1(state) || state.node != node_t::RANGE_12_2) break; __attribute__ ((fallthrough));
+            case node_t::RANGE_12_2: if (!range_12_2(state) || state.node != node_t::LOOP_12_3) break; __attribute__ ((fallthrough));
             case node_t::LOOP_12_3: loop_12_3(state); break;
-            case node_t::TEXT_13_0: text_13_0(state); break;
+            case node_t::TEXT_13_0: if (!text_13_0(state) || state.node != node_t::RET_13_1) break; __attribute__ ((fallthrough));
             case node_t::RET_13_1: ret_13_1(state); break;
-            case node_t::RANGE_14_0: range_14_0(state); break;
-            case node_t::TEXT_14_1: text_14_1(state); break;
-            case node_t::FUNC_14_2: func_14_2(state); break;
-            case node_t::NOTIFY_14_3: notify_14_3(state); break;
+            case node_t::RANGE_14_0: if (!range_14_0(state) || state.node != node_t::TEXT_14_1) break; __attribute__ ((fallthrough));
+            case node_t::TEXT_14_1: if (!text_14_1(state) || state.node != node_t::FUNC_14_2) break; __attribute__ ((fallthrough));
+            case node_t::FUNC_14_2: if (!func_14_2(state) || state.node != node_t::NOTIFY_14_3) break; __attribute__ ((fallthrough));
+            case node_t::NOTIFY_14_3: if (!notify_14_3(state) || state.node != node_t::RET_14_4) break; __attribute__ ((fallthrough));
             case node_t::RET_14_4: ret_14_4(state); break;
-            case node_t::STRING_15_0: string_15_0(state); break;
-            case node_t::RANGE_15_1: range_15_1(state); break;
-            case node_t::TEXT_15_2: text_15_2(state); break;
-            case node_t::RANGE_15_3: range_15_3(state); break;
-            case node_t::RANGE_15_4: range_15_4(state); break;
-            case node_t::STRING_15_5: string_15_5(state); break;
-            case node_t::RANGE_15_6: range_15_6(state); break;
-            case node_t::NOTIFY_15_7: notify_15_7(state); break;
+            case node_t::STRING_15_0: if (!string_15_0(state) || state.node != node_t::RANGE_15_1) break; __attribute__ ((fallthrough));
+            case node_t::RANGE_15_1: if (!range_15_1(state) || state.node != node_t::TEXT_15_2) break; __attribute__ ((fallthrough));
+            case node_t::TEXT_15_2: if (!text_15_2(state) || state.node != node_t::RANGE_15_3) break; __attribute__ ((fallthrough));
+            case node_t::RANGE_15_3: if (!range_15_3(state) || state.node != node_t::RANGE_15_4) break; __attribute__ ((fallthrough));
+            case node_t::RANGE_15_4: if (!range_15_4(state) || state.node != node_t::STRING_15_5) break; __attribute__ ((fallthrough));
+            case node_t::STRING_15_5: if (!string_15_5(state) || state.node != node_t::RANGE_15_6) break; __attribute__ ((fallthrough));
+            case node_t::RANGE_15_6: if (!range_15_6(state) || state.node != node_t::NOTIFY_15_7) break; __attribute__ ((fallthrough));
+            case node_t::NOTIFY_15_7: if (!notify_15_7(state) || state.node != node_t::RANGE_15_8) break; __attribute__ ((fallthrough));
             case node_t::RANGE_15_8: range_15_8(state); break;
             case node_t::LOOP_17_0: loop_17_0(state); break;
             case node_t::UINT_17_0: uint_17_0(state); break;
@@ -250,6 +250,7 @@ inline bool xml::text_4_0(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
+            state.consumed = 0;
             state.node = node_t::NO_STATE;
             return false;
         }
@@ -384,6 +385,7 @@ inline bool xml::text_8_0(state_t & state, bool isCaseCall)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
+            state.consumed = 0;
             state.node = node_t::NO_STATE;
             bool ret = isCaseCall && state.consumed > 1;
             state.consumed = 0;
@@ -414,6 +416,7 @@ inline bool xml::text_9_0(state_t & state, bool isCaseCall)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
+            state.consumed = 0;
             state.node = node_t::RANGE_10_0;
             bool ret = isCaseCall && state.consumed > 1;
             state.consumed = 0;
@@ -508,6 +511,7 @@ inline bool xml::text_11_0(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
+            state.consumed = 0;
             state.node = node_t::NO_STATE;
             return false;
         }
@@ -843,6 +847,7 @@ inline bool xml::text_13_0(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
+            state.consumed = 0;
             state.node = node_t::NO_STATE;
             return false;
         }
@@ -912,6 +917,7 @@ inline bool xml::text_14_1(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
+            state.consumed = 0;
             state.node = node_t::NO_STATE;
             return false;
         }
@@ -1100,6 +1106,7 @@ inline bool xml::text_15_2(state_t & state)
         uint8_t sym = (uint8_t)state.data[0];
         if (text[state.consumed++] != sym)
         {
+            state.consumed = 0;
             state.node = node_t::NO_STATE;
             return false;
         }
