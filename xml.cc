@@ -136,25 +136,24 @@ inline bool xml::range_2_0(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -166,7 +165,6 @@ inline bool xml::range_2_0(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_1_1);
@@ -200,25 +198,24 @@ inline bool xml::range_3_0(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -230,7 +227,6 @@ inline bool xml::range_3_0(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_1_1);
@@ -244,17 +240,16 @@ inline bool xml::range_3_0(state_t & state)
 
 inline bool xml::text_4_0(state_t & state)
 {
-    static uint8_t text[] = { 0x3c }; // <
+    const static uint8_t text[] = { 0x3c}; // <
     for(; state.data < state.end; state.data++)
     {
-        uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.consumed++] != sym)
+        if (text[state.consumed] != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             state.consumed = 0;
             return false;
         }
-        else if (state.consumed >= sizeof(text))
+        else if (++state.consumed >= sizeof(text))
         {
             state.data++;
             state.consumed = 0;
@@ -303,25 +298,24 @@ inline bool xml::range_5_0(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -333,7 +327,6 @@ inline bool xml::range_5_0(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         xmlResult::payload(beginData, unsigned(state.data - beginData), isFirstData, true);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
@@ -379,18 +372,17 @@ inline bool xml::loop_7_1(state_t & state)
 
 inline bool xml::text_8_0(state_t & state, bool isCaseCall)
 {
-    static uint8_t text[] = { 0x21, 0x2d, 0x2d }; // !--
+    const static uint8_t text[] = { 0x21, 0x2d, 0x2d}; // !--
     for(; state.data < state.end; state.data++)
     {
-        uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.consumed++] != sym)
+        if (text[state.consumed] != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
-            bool ret = isCaseCall && state.consumed > 1;
+            bool ret = isCaseCall && state.consumed;
             state.consumed = 0;
             return ret;
         }
-        else if (state.consumed >= sizeof(text))
+        else if (++state.consumed >= sizeof(text))
         {
             state.data++;
             state.consumed = 0;
@@ -409,18 +401,17 @@ inline bool xml::loop_8_1(state_t & state)
 
 inline bool xml::text_9_0(state_t & state, bool isCaseCall)
 {
-    static uint8_t text[] = { 0x2d, 0x2d, 0x3e }; // -->
+    const static uint8_t text[] = { 0x2d, 0x2d, 0x3e}; // -->
     for(; state.data < state.end; state.data++)
     {
-        uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.consumed++] != sym)
+        if (text[state.consumed] != uint8_t(state.data[0]))
         {
             state.node = node_t::RANGE_10_0;
-            bool ret = isCaseCall && state.consumed > 1;
+            bool ret = isCaseCall && state.consumed;
             state.consumed = 0;
             return ret;
         }
-        else if (state.consumed >= sizeof(text))
+        else if (++state.consumed >= sizeof(text))
         {
             state.data++;
             state.consumed = 0;
@@ -460,25 +451,24 @@ inline bool xml::range_10_0(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -490,7 +480,6 @@ inline bool xml::range_10_0(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         state.node = node_t::LOOP_8_1;
         bool ret = (state.node == node_t::LOOP_8_1);
         state.consumed = 0;
@@ -503,17 +492,16 @@ inline bool xml::range_10_0(state_t & state)
 
 inline bool xml::text_11_0(state_t & state)
 {
-    static uint8_t text[] = { 0x2f }; // /
+    const static uint8_t text[] = { 0x2f}; // /
     for(; state.data < state.end; state.data++)
     {
-        uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.consumed++] != sym)
+        if (text[state.consumed] != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             state.consumed = 0;
             return false;
         }
-        else if (state.consumed >= sizeof(text))
+        else if (++state.consumed >= sizeof(text))
         {
             state.data++;
             state.consumed = 0;
@@ -557,25 +545,24 @@ inline bool xml::string_11_1(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -587,7 +574,6 @@ inline bool xml::string_11_1(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         _string_11_1(beginData, unsigned(state.data - beginData), isFirstData);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::RANGE_11_2 : node_t::NO_STATE;
@@ -699,25 +685,24 @@ inline bool xml::string_12_0(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -729,7 +714,6 @@ inline bool xml::string_12_0(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         _string_12_0(beginData, unsigned(state.data - beginData), isFirstData);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::FUNC_12_1 : node_t::NO_STATE;
@@ -778,25 +762,24 @@ inline bool xml::range_12_2(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -808,7 +791,6 @@ inline bool xml::range_12_2(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         state.node = node_t::LOOP_12_3;
         bool ret = (state.node == node_t::LOOP_12_3);
         state.consumed = 0;
@@ -839,17 +821,16 @@ inline bool xml::loop_12_3(state_t & state)
 
 inline bool xml::text_13_0(state_t & state)
 {
-    static uint8_t text[] = { 0x3e }; // >
+    const static uint8_t text[] = { 0x3e}; // >
     for(; state.data < state.end; state.data++)
     {
-        uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.consumed++] != sym)
+        if (text[state.consumed] != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             state.consumed = 0;
             return false;
         }
-        else if (state.consumed >= sizeof(text))
+        else if (++state.consumed >= sizeof(text))
         {
             state.data++;
             state.consumed = 0;
@@ -909,17 +890,16 @@ inline bool xml::range_14_0(state_t & state)
 
 inline bool xml::text_14_1(state_t & state)
 {
-    static uint8_t text[] = { 0x3e }; // >
+    const static uint8_t text[] = { 0x3e}; // >
     for(; state.data < state.end; state.data++)
     {
-        uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.consumed++] != sym)
+        if (text[state.consumed] != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             state.consumed = 0;
             return false;
         }
-        else if (state.consumed >= sizeof(text))
+        else if (++state.consumed >= sizeof(text))
         {
             state.data++;
             state.consumed = 0;
@@ -988,25 +968,24 @@ inline bool xml::string_15_0(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -1018,7 +997,6 @@ inline bool xml::string_15_0(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         _string_15_0(beginData, unsigned(state.data - beginData), isFirstData);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::RANGE_15_1 : node_t::NO_STATE;
@@ -1055,25 +1033,24 @@ inline bool xml::range_15_1(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -1085,7 +1062,6 @@ inline bool xml::range_15_1(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         state.node = node_t::TEXT_15_2;
         bool ret = (state.node == node_t::TEXT_15_2);
         state.consumed = 0;
@@ -1098,17 +1074,16 @@ inline bool xml::range_15_1(state_t & state)
 
 inline bool xml::text_15_2(state_t & state)
 {
-    static uint8_t text[] = { 0x3d }; // =
+    const static uint8_t text[] = { 0x3d}; // =
     for(; state.data < state.end; state.data++)
     {
-        uint8_t sym = (uint8_t)state.data[0];
-        if (text[state.consumed++] != sym)
+        if (text[state.consumed] != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             state.consumed = 0;
             return false;
         }
-        else if (state.consumed >= sizeof(text))
+        else if (++state.consumed >= sizeof(text))
         {
             state.data++;
             state.consumed = 0;
@@ -1142,25 +1117,24 @@ inline bool xml::range_15_3(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -1172,7 +1146,6 @@ inline bool xml::range_15_3(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         state.node = node_t::RANGE_15_4;
         bool ret = (state.node == node_t::RANGE_15_4);
         state.consumed = 0;
@@ -1255,25 +1228,24 @@ inline bool xml::string_15_5(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -1285,7 +1257,6 @@ inline bool xml::string_15_5(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         _string_15_5(beginData, unsigned(state.data - beginData), isFirstData);
         state.node = node_t::RANGE_15_6;
         bool ret = (state.node == node_t::RANGE_15_6);
@@ -1368,25 +1339,24 @@ inline bool xml::range_15_8(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -1398,7 +1368,6 @@ inline bool xml::range_15_8(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         state.node = node_t::LOOP_12_3;
         bool ret = (state.node == node_t::LOOP_12_3);
         state.consumed = 0;
@@ -1445,25 +1414,24 @@ inline bool xml::uint_17_0(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned exitCount = 0;
         if(&state.data[8] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])])
-                exitCount = 0;
+                state.data += 0;
             else if (exitSym[uint8_t(state.data[1])])
-                exitCount = 1;
+                state.data += 1;
             else if (exitSym[uint8_t(state.data[2])])
-                exitCount = 2;
+                state.data += 2;
             else if (exitSym[uint8_t(state.data[3])])
-                exitCount = 3;
+                state.data += 3;
             else if (exitSym[uint8_t(state.data[4])])
-                exitCount = 4;
+                state.data += 4;
             else if (exitSym[uint8_t(state.data[5])])
-                exitCount = 5;
+                state.data += 5;
             else if (exitSym[uint8_t(state.data[6])])
-                exitCount = 6;
+                state.data += 6;
             else if (exitSym[uint8_t(state.data[7])])
-                exitCount = 7;
+                state.data += 7;
             else
             {
                 state.data += 8;
@@ -1475,7 +1443,6 @@ inline bool xml::uint_17_0(state_t & state)
             state.data++;
             continue;
         }
-        state.data += exitCount;
         _uint_17_0(beginData, unsigned(state.data - beginData), isFirstData);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::LOOP_17_0 : node_t::NO_STATE;
