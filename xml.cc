@@ -134,33 +134,49 @@ inline bool xml::range_2_0(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0xa][0xd]
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -196,33 +212,49 @@ inline bool xml::range_3_0(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -296,33 +328,49 @@ inline bool xml::range_5_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x3c]
     bool isFirstData = !state.consumed;
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -449,33 +497,49 @@ inline bool xml::range_10_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x2d]
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -543,33 +607,49 @@ inline bool xml::string_11_1(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x3e]
     bool isFirstData = !state.consumed;
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -611,7 +691,7 @@ inline bool xml::range_11_2(state_t & state)
     {
         unsigned stateDataCount = 1;
         for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])])
+            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
             {
                 state.data += i;
                 state.consumed += i;
@@ -683,33 +763,49 @@ inline bool xml::string_12_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x9][0x20][0x3e]
     bool isFirstData = !state.consumed;
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -760,33 +856,49 @@ inline bool xml::range_12_2(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -871,7 +983,7 @@ inline bool xml::range_14_0(state_t & state)
     {
         unsigned stateDataCount = 1;
         for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])])
+            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
             {
                 state.data += i;
                 state.consumed += i;
@@ -966,33 +1078,49 @@ inline bool xml::string_15_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x9][0x20][0x3d]
     bool isFirstData = !state.consumed;
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -1031,33 +1159,49 @@ inline bool xml::range_15_1(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -1115,33 +1259,49 @@ inline bool xml::range_15_3(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -1179,7 +1339,7 @@ inline bool xml::range_15_4(state_t & state)
     {
         unsigned stateDataCount = 1;
         for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])])
+            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
             {
                 state.data += i;
                 state.consumed += i;
@@ -1226,33 +1386,49 @@ inline bool xml::string_15_5(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x22][0x27]
     bool isFirstData = !state.consumed;
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -1293,7 +1469,7 @@ inline bool xml::range_15_6(state_t & state)
     {
         unsigned stateDataCount = 1;
         for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])])
+            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
             {
                 state.data += i;
                 state.consumed += i;
@@ -1337,33 +1513,49 @@ inline bool xml::range_15_8(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
@@ -1412,33 +1604,49 @@ inline bool xml::uint_17_0(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0-9]
     bool isFirstData = !state.consumed;
     const char * beginData = state.data;
-    while(state.data < state.end)
+    while(state.data < state.end) [[likely]]
     {
-        if(&state.data[8] <= state.end)
+        if(&state.data[16] <= state.end)
         {
-            if (exitSym[uint8_t(state.data[0])])
+            if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
                 state.data += 0;
-            else if (exitSym[uint8_t(state.data[1])])
+            else if (exitSym[uint8_t(state.data[1])]) [[unlikely]]
                 state.data += 1;
-            else if (exitSym[uint8_t(state.data[2])])
+            else if (exitSym[uint8_t(state.data[2])]) [[unlikely]]
                 state.data += 2;
-            else if (exitSym[uint8_t(state.data[3])])
+            else if (exitSym[uint8_t(state.data[3])]) [[unlikely]]
                 state.data += 3;
-            else if (exitSym[uint8_t(state.data[4])])
+            else if (exitSym[uint8_t(state.data[4])]) [[unlikely]]
                 state.data += 4;
-            else if (exitSym[uint8_t(state.data[5])])
+            else if (exitSym[uint8_t(state.data[5])]) [[unlikely]]
                 state.data += 5;
-            else if (exitSym[uint8_t(state.data[6])])
+            else if (exitSym[uint8_t(state.data[6])]) [[unlikely]]
                 state.data += 6;
-            else if (exitSym[uint8_t(state.data[7])])
+            else if (exitSym[uint8_t(state.data[7])]) [[unlikely]]
                 state.data += 7;
+            else if (exitSym[uint8_t(state.data[8])]) [[unlikely]]
+                state.data += 8;
+            else if (exitSym[uint8_t(state.data[9])]) [[unlikely]]
+                state.data += 9;
+            else if (exitSym[uint8_t(state.data[10])]) [[unlikely]]
+                state.data += 10;
+            else if (exitSym[uint8_t(state.data[11])]) [[unlikely]]
+                state.data += 11;
+            else if (exitSym[uint8_t(state.data[12])]) [[unlikely]]
+                state.data += 12;
+            else if (exitSym[uint8_t(state.data[13])]) [[unlikely]]
+                state.data += 13;
+            else if (exitSym[uint8_t(state.data[14])]) [[unlikely]]
+                state.data += 14;
+            else if (exitSym[uint8_t(state.data[15])]) [[unlikely]]
+                state.data += 15;
             else
             {
-                state.data += 8;
+                state.data += 16;
                 continue;
             }
         }
-        else if (!exitSym[uint8_t(state.data[0])])
+        else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
