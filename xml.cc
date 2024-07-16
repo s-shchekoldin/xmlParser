@@ -272,19 +272,14 @@ inline bool xml::range_3_0(state_t & state)
 
 inline bool xml::text_4_0(state_t & state)
 {
-    const static uint8_t text[] = { 0x3c}; // <
-    for(; state.data < state.end; state.data++)
+    if(state.data < state.end)
     {
-        if (text[state.consumed] != uint8_t(state.data[0]))
+        if (uint8_t(0X3C) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
-            state.consumed = 0;
             return false;
-        }
-        else if (++state.consumed >= sizeof(text))
-        {
+        } else {
             state.data++;
-            state.consumed = 0;
             state.node = node_t::GOTO_4_1;
             return true;
         }
@@ -556,19 +551,14 @@ inline bool xml::range_10_0(state_t & state)
 
 inline bool xml::text_11_0(state_t & state)
 {
-    const static uint8_t text[] = { 0x2f}; // /
-    for(; state.data < state.end; state.data++)
+    if(state.data < state.end)
     {
-        if (text[state.consumed] != uint8_t(state.data[0]))
+        if (uint8_t(0X2F) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
-            state.consumed = 0;
             return false;
-        }
-        else if (++state.consumed >= sizeof(text))
-        {
+        } else {
             state.data++;
-            state.consumed = 0;
             state.node = node_t::STRING_11_1;
             return true;
         }
@@ -933,19 +923,14 @@ inline bool xml::loop_12_3(state_t & state)
 
 inline bool xml::text_13_0(state_t & state)
 {
-    const static uint8_t text[] = { 0x3e}; // >
-    for(; state.data < state.end; state.data++)
+    if(state.data < state.end)
     {
-        if (text[state.consumed] != uint8_t(state.data[0]))
+        if (uint8_t(0X3E) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
-            state.consumed = 0;
             return false;
-        }
-        else if (++state.consumed >= sizeof(text))
-        {
+        } else {
             state.data++;
-            state.consumed = 0;
             state.node = node_t::RET_13_1;
             return true;
         }
@@ -1002,19 +987,14 @@ inline bool xml::range_14_0(state_t & state)
 
 inline bool xml::text_14_1(state_t & state)
 {
-    const static uint8_t text[] = { 0x3e}; // >
-    for(; state.data < state.end; state.data++)
+    if(state.data < state.end)
     {
-        if (text[state.consumed] != uint8_t(state.data[0]))
+        if (uint8_t(0X3E) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
-            state.consumed = 0;
             return false;
-        }
-        else if (++state.consumed >= sizeof(text))
-        {
+        } else {
             state.data++;
-            state.consumed = 0;
             state.node = node_t::FUNC_14_2;
             return true;
         }
@@ -1218,19 +1198,14 @@ inline bool xml::range_15_1(state_t & state)
 
 inline bool xml::text_15_2(state_t & state)
 {
-    const static uint8_t text[] = { 0x3d}; // =
-    for(; state.data < state.end; state.data++)
+    if(state.data < state.end)
     {
-        if (text[state.consumed] != uint8_t(state.data[0]))
+        if (uint8_t(0X3D) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
-            state.consumed = 0;
             return false;
-        }
-        else if (++state.consumed >= sizeof(text))
-        {
+        } else {
             state.data++;
-            state.consumed = 0;
             state.node = node_t::RANGE_15_3;
             return true;
         }
