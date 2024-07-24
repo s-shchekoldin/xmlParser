@@ -1,5 +1,6 @@
 // ==============================================================
-// Generated using https://www.vsyn.ru/
+// Date: 2024-07-24 20:19:32 GMT
+// Generated using vProto(2024.07.24)         https://www.vsyn.ru
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -27,7 +28,7 @@ struct xmlResult
 struct xml : xmlResult
 {
     bool parse(const char * data, unsigned len);
-    bool parse(const std::string & data) { return parse(data.c_str(), data.length()); }
+    bool parse(const std::string & data) { return parse(data.data(), data.length()); }
     void reset();
     bool empty() const { return mainState.node == node_t::NO_STATE; }
 
@@ -63,6 +64,7 @@ private:
         node_t node = node_t::LOOP_1_0;
         unsigned retStackCount = 0;
         node_t retStack[2];
+
         unsigned remainDataLen() const { return (unsigned)(end - data); }
         const char * name() const;
     };
@@ -87,14 +89,14 @@ private:
     bool range_10_0(state_t & state);
     bool text_11_0(state_t & state);
     bool string_11_1(state_t & state);
-    void _string_11_1(const char * data, unsigned len, bool isFirst);
+    void _string_11_1(const char * data, unsigned len, uint64_t consumed);
     bool range_11_2(state_t & state);
     bool func_11_3(state_t & state);
     bool _func_11_3();
     bool notify_11_4(state_t & state);
     bool ret_11_5(state_t & state);
     bool string_12_0(state_t & state);
-    void _string_12_0(const char * data, unsigned len, bool isFirst);
+    void _string_12_0(const char * data, unsigned len, uint64_t consumed);
     bool func_12_1(state_t & state);
     bool _func_12_1();
     bool range_12_2(state_t & state);
@@ -108,18 +110,18 @@ private:
     bool notify_14_3(state_t & state);
     bool ret_14_4(state_t & state);
     bool string_15_0(state_t & state);
-    void _string_15_0(const char * data, unsigned len, bool isFirst);
+    void _string_15_0(const char * data, unsigned len, uint64_t consumed);
     bool range_15_1(state_t & state);
     bool text_15_2(state_t & state);
     bool range_15_3(state_t & state);
     bool range_15_4(state_t & state);
     bool string_15_5(state_t & state);
-    void _string_15_5(const char * data, unsigned len, bool isFirst);
+    void _string_15_5(const char * data, unsigned len, uint64_t consumed);
     bool range_15_6(state_t & state);
     bool notify_15_7(state_t & state);
     bool range_15_8(state_t & state);
     bool loop_17_0(state_t & state);
     bool uint_17_0(state_t & state);
-    void _uint_17_0(const char * data, unsigned len, bool isFirst);
+    void _uint_17_0(const char * data, unsigned len, uint64_t consumed);
 };
 #endif

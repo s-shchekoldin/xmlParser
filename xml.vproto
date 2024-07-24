@@ -1,0 +1,17 @@
+label:start
+    [\r\n]+
+    [ \t]+
+    "<" call:TAG
+    [^<]->payload
+
+label:TAG
+    "!--"
+        "-->" return
+        catch: [^\-]*
+    "/" [^>]->string:tag [>] { return opend--; } notify:finishTag return
+    [^> \t]->string:tag { opend++; } [ \t]*
+        ">" return
+        [/?] ">" { return opend--; } notify:finishTag return
+        [^ \t=]->string:key [ \t]* "=" [ \t]* ["'] [^\"']*->string:value ["'] notify:getAttribute [ \t]*
+
+u32:opend

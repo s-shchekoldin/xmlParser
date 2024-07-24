@@ -1,5 +1,6 @@
 // ==============================================================
-// Generated using https://www.vsyn.ru/
+// Date: 2024-07-24 20:19:32 GMT
+// Generated using vProto(2024.07.24)         https://www.vsyn.ru
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -23,46 +24,46 @@ inline void xml::parse(state_t & state)
         switch(state.node)
         {
             case node_t::LOOP_1_0: loop_1_0(state); break;
-            case node_t::LABEL_1_0: if (!label_1_0(state) || state.node != node_t::LOOP_1_1) break; __attribute__ ((fallthrough));
+            case node_t::LABEL_1_0: if (!label_1_0(state) || state.node != node_t::LOOP_1_1) break; [[fallthrough]];
             case node_t::LOOP_1_1: loop_1_1(state); break;
             case node_t::RANGE_2_0: range_2_0(state); break;
             case node_t::RANGE_3_0: range_3_0(state); break;
-            case node_t::TEXT_4_0: if (!text_4_0(state) || state.node != node_t::GOTO_4_1) break; __attribute__ ((fallthrough));
+            case node_t::TEXT_4_0: if (!text_4_0(state) || state.node != node_t::GOTO_4_1) break; [[fallthrough]];
             case node_t::GOTO_4_1: goto_4_1(state); break;
             case node_t::RANGE_5_0: range_5_0(state); break;
             case node_t::LOOP_7_0: loop_7_0(state); break;
-            case node_t::LABEL_7_0: if (!label_7_0(state) || state.node != node_t::LOOP_7_1) break; __attribute__ ((fallthrough));
+            case node_t::LABEL_7_0: if (!label_7_0(state) || state.node != node_t::LOOP_7_1) break; [[fallthrough]];
             case node_t::LOOP_7_1: loop_7_1(state); break;
-            case node_t::TEXT_8_0: if (!text_8_0(state, false) || state.node != node_t::LOOP_8_1) break; __attribute__ ((fallthrough));
+            case node_t::TEXT_8_0: if (!text_8_0(state, false) || state.node != node_t::LOOP_8_1) break; [[fallthrough]];
             case node_t::LOOP_8_1: loop_8_1(state); break;
-            case node_t::TEXT_9_0: if (!text_9_0(state, false) || state.node != node_t::RET_9_1) break; __attribute__ ((fallthrough));
+            case node_t::TEXT_9_0: if (!text_9_0(state, false) || state.node != node_t::RET_9_1) break; [[fallthrough]];
             case node_t::RET_9_1: ret_9_1(state); break;
             case node_t::RANGE_10_0: range_10_0(state); break;
-            case node_t::TEXT_11_0: if (!text_11_0(state) || state.node != node_t::STRING_11_1) break; __attribute__ ((fallthrough));
-            case node_t::STRING_11_1: if (!string_11_1(state) || state.node != node_t::RANGE_11_2) break; __attribute__ ((fallthrough));
-            case node_t::RANGE_11_2: if (!range_11_2(state) || state.node != node_t::FUNC_11_3) break; __attribute__ ((fallthrough));
-            case node_t::FUNC_11_3: if (!func_11_3(state) || state.node != node_t::NOTIFY_11_4) break; __attribute__ ((fallthrough));
-            case node_t::NOTIFY_11_4: if (!notify_11_4(state) || state.node != node_t::RET_11_5) break; __attribute__ ((fallthrough));
+            case node_t::TEXT_11_0: if (!text_11_0(state) || state.node != node_t::STRING_11_1) break; [[fallthrough]];
+            case node_t::STRING_11_1: if (!string_11_1(state) || state.node != node_t::RANGE_11_2) break; [[fallthrough]];
+            case node_t::RANGE_11_2: if (!range_11_2(state) || state.node != node_t::FUNC_11_3) break; [[fallthrough]];
+            case node_t::FUNC_11_3: if (!func_11_3(state) || state.node != node_t::NOTIFY_11_4) break; [[fallthrough]];
+            case node_t::NOTIFY_11_4: if (!notify_11_4(state) || state.node != node_t::RET_11_5) break; [[fallthrough]];
             case node_t::RET_11_5: ret_11_5(state); break;
-            case node_t::STRING_12_0: if (!string_12_0(state) || state.node != node_t::FUNC_12_1) break; __attribute__ ((fallthrough));
-            case node_t::FUNC_12_1: if (!func_12_1(state) || state.node != node_t::RANGE_12_2) break; __attribute__ ((fallthrough));
-            case node_t::RANGE_12_2: if (!range_12_2(state) || state.node != node_t::LOOP_12_3) break; __attribute__ ((fallthrough));
+            case node_t::STRING_12_0: if (!string_12_0(state) || state.node != node_t::FUNC_12_1) break; [[fallthrough]];
+            case node_t::FUNC_12_1: if (!func_12_1(state) || state.node != node_t::RANGE_12_2) break; [[fallthrough]];
+            case node_t::RANGE_12_2: if (!range_12_2(state) || state.node != node_t::LOOP_12_3) break; [[fallthrough]];
             case node_t::LOOP_12_3: loop_12_3(state); break;
-            case node_t::TEXT_13_0: if (!text_13_0(state) || state.node != node_t::RET_13_1) break; __attribute__ ((fallthrough));
+            case node_t::TEXT_13_0: if (!text_13_0(state) || state.node != node_t::RET_13_1) break; [[fallthrough]];
             case node_t::RET_13_1: ret_13_1(state); break;
-            case node_t::RANGE_14_0: if (!range_14_0(state) || state.node != node_t::TEXT_14_1) break; __attribute__ ((fallthrough));
-            case node_t::TEXT_14_1: if (!text_14_1(state) || state.node != node_t::FUNC_14_2) break; __attribute__ ((fallthrough));
-            case node_t::FUNC_14_2: if (!func_14_2(state) || state.node != node_t::NOTIFY_14_3) break; __attribute__ ((fallthrough));
-            case node_t::NOTIFY_14_3: if (!notify_14_3(state) || state.node != node_t::RET_14_4) break; __attribute__ ((fallthrough));
+            case node_t::RANGE_14_0: if (!range_14_0(state) || state.node != node_t::TEXT_14_1) break; [[fallthrough]];
+            case node_t::TEXT_14_1: if (!text_14_1(state) || state.node != node_t::FUNC_14_2) break; [[fallthrough]];
+            case node_t::FUNC_14_2: if (!func_14_2(state) || state.node != node_t::NOTIFY_14_3) break; [[fallthrough]];
+            case node_t::NOTIFY_14_3: if (!notify_14_3(state) || state.node != node_t::RET_14_4) break; [[fallthrough]];
             case node_t::RET_14_4: ret_14_4(state); break;
-            case node_t::STRING_15_0: if (!string_15_0(state) || state.node != node_t::RANGE_15_1) break; __attribute__ ((fallthrough));
-            case node_t::RANGE_15_1: if (!range_15_1(state) || state.node != node_t::TEXT_15_2) break; __attribute__ ((fallthrough));
-            case node_t::TEXT_15_2: if (!text_15_2(state) || state.node != node_t::RANGE_15_3) break; __attribute__ ((fallthrough));
-            case node_t::RANGE_15_3: if (!range_15_3(state) || state.node != node_t::RANGE_15_4) break; __attribute__ ((fallthrough));
-            case node_t::RANGE_15_4: if (!range_15_4(state) || state.node != node_t::STRING_15_5) break; __attribute__ ((fallthrough));
-            case node_t::STRING_15_5: if (!string_15_5(state) || state.node != node_t::RANGE_15_6) break; __attribute__ ((fallthrough));
-            case node_t::RANGE_15_6: if (!range_15_6(state) || state.node != node_t::NOTIFY_15_7) break; __attribute__ ((fallthrough));
-            case node_t::NOTIFY_15_7: if (!notify_15_7(state) || state.node != node_t::RANGE_15_8) break; __attribute__ ((fallthrough));
+            case node_t::STRING_15_0: if (!string_15_0(state) || state.node != node_t::RANGE_15_1) break; [[fallthrough]];
+            case node_t::RANGE_15_1: if (!range_15_1(state) || state.node != node_t::TEXT_15_2) break; [[fallthrough]];
+            case node_t::TEXT_15_2: if (!text_15_2(state) || state.node != node_t::RANGE_15_3) break; [[fallthrough]];
+            case node_t::RANGE_15_3: if (!range_15_3(state) || state.node != node_t::RANGE_15_4) break; [[fallthrough]];
+            case node_t::RANGE_15_4: if (!range_15_4(state) || state.node != node_t::STRING_15_5) break; [[fallthrough]];
+            case node_t::STRING_15_5: if (!string_15_5(state) || state.node != node_t::RANGE_15_6) break; [[fallthrough]];
+            case node_t::RANGE_15_6: if (!range_15_6(state) || state.node != node_t::NOTIFY_15_7) break; [[fallthrough]];
+            case node_t::NOTIFY_15_7: if (!notify_15_7(state) || state.node != node_t::RANGE_15_8) break; [[fallthrough]];
             case node_t::RANGE_15_8: range_15_8(state); break;
             case node_t::LOOP_17_0: loop_17_0(state); break;
             case node_t::UINT_17_0: uint_17_0(state); break;
@@ -274,7 +275,7 @@ inline bool xml::text_4_0(state_t & state)
 {
     if(state.data < state.end)
     {
-        if (uint8_t(0X3C) != uint8_t(state.data[0]))
+        if (uint8_t(0x3C) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             return false;
@@ -321,7 +322,6 @@ inline bool xml::range_5_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x3c]
-    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
@@ -370,16 +370,16 @@ inline bool xml::range_5_0(state_t & state)
             state.data++;
             continue;
         }
-        xmlResult::payload(beginData, unsigned(state.data - beginData), isFirstData, true);
+        xmlResult::payload(beginData, unsigned(state.data - beginData), !state.consumed, true);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_1_1);
         state.consumed = 0;
         return ret;
     }
-    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
-        xmlResult::payload(beginData, unsigned(state.data - beginData), isFirstData, false);
+        xmlResult::payload(beginData, unsigned(state.data - beginData), !state.consumed, false);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_5_0;
     return true;
 }
@@ -553,7 +553,7 @@ inline bool xml::text_11_0(state_t & state)
 {
     if(state.data < state.end)
     {
-        if (uint8_t(0X2F) != uint8_t(state.data[0]))
+        if (uint8_t(0x2F) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             return false;
@@ -567,11 +567,11 @@ inline bool xml::text_11_0(state_t & state)
     return true;
 }
 
-inline void xml::_string_11_1(const char * data, unsigned len, bool isFirst)
+void xml::_string_11_1(const char * data, unsigned len, uint64_t consumed)
 {
-    if (isFirst)
+    if (!consumed)
         xmlResult::tag.clear();
-    else if ((xmlResult::tag.length() + len) > 256)
+    if ((xmlResult::tag.length() + len) > 256)
         len = 256 - xmlResult::tag.length();
     xmlResult::tag.append(data, len);
 }
@@ -595,7 +595,6 @@ inline bool xml::string_11_1(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x3e]
-    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
@@ -644,16 +643,16 @@ inline bool xml::string_11_1(state_t & state)
             state.data++;
             continue;
         }
-        _string_11_1(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_11_1(beginData, unsigned(state.data - beginData), state.consumed);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::RANGE_11_2 : node_t::NO_STATE;
         bool ret = (state.node == node_t::RANGE_11_2);
         state.consumed = 0;
         return ret;
     }
-    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
-        _string_11_1(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_11_1(beginData, unsigned(state.data - beginData), state.consumed);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::STRING_11_1;
     return true;
 }
@@ -677,20 +676,18 @@ inline bool xml::range_11_2(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x3e]
+    const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned stateDataCount = 1;
-        for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
-            {
-                state.data += i;
-                state.consumed += i;
-                state.node = (state.consumed >= 1) ? node_t::FUNC_11_3 : node_t::NO_STATE;
-                bool ret = (state.node == node_t::FUNC_11_3);
-                state.consumed = 0;
-                return ret;
-            }
-        state.data += stateDataCount;
+        if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
+        {
+            state.consumed += unsigned(state.data - beginData);
+            state.node = (state.consumed >= 1) ? node_t::FUNC_11_3 : node_t::NO_STATE;
+            bool ret = (state.node == node_t::FUNC_11_3);
+            state.consumed = 0;
+            return ret;
+        }
+        state.data++;
         state.node = node_t::FUNC_11_3;
         return true;
     }
@@ -723,11 +720,11 @@ inline bool xml::ret_11_5(state_t & state)
     return state.node != node_t::NO_STATE;
 }
 
-inline void xml::_string_12_0(const char * data, unsigned len, bool isFirst)
+void xml::_string_12_0(const char * data, unsigned len, uint64_t consumed)
 {
-    if (isFirst)
+    if (!consumed)
         xmlResult::tag.clear();
-    else if ((xmlResult::tag.length() + len) > 256)
+    if ((xmlResult::tag.length() + len) > 256)
         len = 256 - xmlResult::tag.length();
     xmlResult::tag.append(data, len);
 }
@@ -751,7 +748,6 @@ inline bool xml::string_12_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x9][0x20][0x3e]
-    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
@@ -800,16 +796,16 @@ inline bool xml::string_12_0(state_t & state)
             state.data++;
             continue;
         }
-        _string_12_0(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_12_0(beginData, unsigned(state.data - beginData), state.consumed);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::FUNC_12_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::FUNC_12_1);
         state.consumed = 0;
         return ret;
     }
-    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
-        _string_12_0(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_12_0(beginData, unsigned(state.data - beginData), state.consumed);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::STRING_12_0;
     return true;
 }
@@ -925,7 +921,7 @@ inline bool xml::text_13_0(state_t & state)
 {
     if(state.data < state.end)
     {
-        if (uint8_t(0X3E) != uint8_t(state.data[0]))
+        if (uint8_t(0x3E) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             return false;
@@ -964,20 +960,18 @@ inline bool xml::range_14_0(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x2f][0x3f]
+    const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned stateDataCount = 1;
-        for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
-            {
-                state.data += i;
-                state.consumed += i;
-                state.node = (state.consumed >= 1) ? node_t::TEXT_14_1 : node_t::NO_STATE;
-                bool ret = (state.node == node_t::TEXT_14_1);
-                state.consumed = 0;
-                return ret;
-            }
-        state.data += stateDataCount;
+        if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
+        {
+            state.consumed += unsigned(state.data - beginData);
+            state.node = (state.consumed >= 1) ? node_t::TEXT_14_1 : node_t::NO_STATE;
+            bool ret = (state.node == node_t::TEXT_14_1);
+            state.consumed = 0;
+            return ret;
+        }
+        state.data++;
         state.node = node_t::TEXT_14_1;
         return true;
     }
@@ -989,7 +983,7 @@ inline bool xml::text_14_1(state_t & state)
 {
     if(state.data < state.end)
     {
-        if (uint8_t(0X3E) != uint8_t(state.data[0]))
+        if (uint8_t(0x3E) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             return false;
@@ -1028,11 +1022,11 @@ inline bool xml::ret_14_4(state_t & state)
     return state.node != node_t::NO_STATE;
 }
 
-inline void xml::_string_15_0(const char * data, unsigned len, bool isFirst)
+void xml::_string_15_0(const char * data, unsigned len, uint64_t consumed)
 {
-    if (isFirst)
+    if (!consumed)
         xmlResult::key.clear();
-    else if ((xmlResult::key.length() + len) > 256)
+    if ((xmlResult::key.length() + len) > 256)
         len = 256 - xmlResult::key.length();
     xmlResult::key.append(data, len);
 }
@@ -1056,7 +1050,6 @@ inline bool xml::string_15_0(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x9][0x20][0x3d]
-    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
@@ -1105,16 +1098,16 @@ inline bool xml::string_15_0(state_t & state)
             state.data++;
             continue;
         }
-        _string_15_0(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_15_0(beginData, unsigned(state.data - beginData), state.consumed);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::RANGE_15_1 : node_t::NO_STATE;
         bool ret = (state.node == node_t::RANGE_15_1);
         state.consumed = 0;
         return ret;
     }
-    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
-        _string_15_0(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_15_0(beginData, unsigned(state.data - beginData), state.consumed);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::STRING_15_0;
     return true;
 }
@@ -1200,7 +1193,7 @@ inline bool xml::text_15_2(state_t & state)
 {
     if(state.data < state.end)
     {
-        if (uint8_t(0X3D) != uint8_t(state.data[0]))
+        if (uint8_t(0x3D) != uint8_t(state.data[0]))
         {
             state.node = node_t::NO_STATE;
             return false;
@@ -1310,20 +1303,18 @@ inline bool xml::range_15_4(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x22][0x27]
+    const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned stateDataCount = 1;
-        for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
-            {
-                state.data += i;
-                state.consumed += i;
-                state.node = (state.consumed >= 1) ? node_t::STRING_15_5 : node_t::NO_STATE;
-                bool ret = (state.node == node_t::STRING_15_5);
-                state.consumed = 0;
-                return ret;
-            }
-        state.data += stateDataCount;
+        if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
+        {
+            state.consumed += unsigned(state.data - beginData);
+            state.node = (state.consumed >= 1) ? node_t::STRING_15_5 : node_t::NO_STATE;
+            bool ret = (state.node == node_t::STRING_15_5);
+            state.consumed = 0;
+            return ret;
+        }
+        state.data++;
         state.node = node_t::STRING_15_5;
         return true;
     }
@@ -1331,11 +1322,11 @@ inline bool xml::range_15_4(state_t & state)
     return true;
 }
 
-inline void xml::_string_15_5(const char * data, unsigned len, bool isFirst)
+void xml::_string_15_5(const char * data, unsigned len, uint64_t consumed)
 {
-    if (isFirst)
+    if (!consumed)
         xmlResult::value.clear();
-    else if ((xmlResult::value.length() + len) > 256)
+    if ((xmlResult::value.length() + len) > 256)
         len = 256 - xmlResult::value.length();
     xmlResult::value.append(data, len);
 }
@@ -1359,7 +1350,6 @@ inline bool xml::string_15_5(state_t & state)
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false}; // ^[0x22][0x27]
-    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
@@ -1408,15 +1398,15 @@ inline bool xml::string_15_5(state_t & state)
             state.data++;
             continue;
         }
-        _string_15_5(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_15_5(beginData, unsigned(state.data - beginData), state.consumed);
         state.node = node_t::RANGE_15_6;
         bool ret = (state.node == node_t::RANGE_15_6);
         state.consumed = 0;
         return ret;
     }
-    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
-        _string_15_5(beginData, unsigned(state.data - beginData), isFirstData);
+        _string_15_5(beginData, unsigned(state.data - beginData), state.consumed);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::STRING_15_5;
     return true;
 }
@@ -1440,20 +1430,18 @@ inline bool xml::range_15_6(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x22][0x27]
+    const char * beginData = state.data;
     while(state.data < state.end)
     {
-        unsigned stateDataCount = 1;
-        for(unsigned i = 0; i < stateDataCount; i++)
-            if (exitSym[uint8_t(state.data[i])]) [[unlikely]]
-            {
-                state.data += i;
-                state.consumed += i;
-                state.node = (state.consumed >= 1) ? node_t::NOTIFY_15_7 : node_t::NO_STATE;
-                bool ret = (state.node == node_t::NOTIFY_15_7);
-                state.consumed = 0;
-                return ret;
-            }
-        state.data += stateDataCount;
+        if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
+        {
+            state.consumed += unsigned(state.data - beginData);
+            state.node = (state.consumed >= 1) ? node_t::NOTIFY_15_7 : node_t::NO_STATE;
+            bool ret = (state.node == node_t::NOTIFY_15_7);
+            state.consumed = 0;
+            return ret;
+        }
+        state.data++;
         state.node = node_t::NOTIFY_15_7;
         return true;
     }
@@ -1550,9 +1538,9 @@ inline bool xml::loop_17_0(state_t & state)
     return uint_17_0(state);
 }
 
-inline void xml::_uint_17_0(const char * data, unsigned len, bool isFirst)
+void xml::_uint_17_0(const char * data, unsigned len, uint64_t consumed)
 {
-    if (isFirst)
+    if (!consumed)
         xmlResult::opend = 0;
     for(const char * end = &data[len]; data < end; data++)
         xmlResult::opend = xmlResult::opend*10 + *data - '0';
@@ -1577,7 +1565,6 @@ inline bool xml::uint_17_0(state_t & state)
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0-9]
-    bool isFirstData = !state.consumed;
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
@@ -1626,16 +1613,16 @@ inline bool xml::uint_17_0(state_t & state)
             state.data++;
             continue;
         }
-        _uint_17_0(beginData, unsigned(state.data - beginData), isFirstData);
+        _uint_17_0(beginData, unsigned(state.data - beginData), state.consumed);
         state.consumed += unsigned(state.data - beginData);
         state.node = (state.consumed >= 1) ? node_t::LOOP_17_0 : node_t::NO_STATE;
         bool ret = (state.node == node_t::LOOP_17_0);
         state.consumed = 0;
         return ret;
     }
-    state.consumed += unsigned(state.data - beginData);
     if (beginData < state.data)
-        _uint_17_0(beginData, unsigned(state.data - beginData), isFirstData);
+        _uint_17_0(beginData, unsigned(state.data - beginData), state.consumed);
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::UINT_17_0;
     return true;
 }
