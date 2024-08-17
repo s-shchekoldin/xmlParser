@@ -1,10 +1,14 @@
 // ==============================================================
-// Date: 2024-08-06 20:12:46 GMT
-// Generated using vProto(2024.08.06)         https://www.vsyn.ru
+// Date: 2024-08-17 11:06:24 GMT
+// Generated using vProto(2024.08.17)         https://www.vsyn.ru
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
 #include "xml.h"
+// To enable SSE4.2, use the compiler flag '-msse4.2' or '-march=native' (if the CPU supports it)
+#ifdef __SSE4_2__
+#include <immintrin.h>
+#endif
 
 inline void xml::parse(state_t & state)
 {
@@ -98,19 +102,14 @@ inline bool xml::loop_1_1(state_t & state)
 {
     if (state.data == state.end)
         return true;
-    state_t startState = state;
     if (range_2_0(state)) // case_1
         return true;
-    state = startState;
     if (range_3_0(state)) // case_2
         return true;
-    state = startState;
     if (text_4_0(state)) // case_3
         return true;
-    state = startState;
     if (range_5_0(state)) // case_4
         return true;
-    state = startState;
     state.node = node_t::NO_STATE;
     return true;
 }
@@ -182,11 +181,16 @@ inline bool xml::range_2_0(state_t & state)
             state.data++;
             continue;
         }
-        state.consumed += unsigned(state.data - beginData);
-        state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
-        bool ret = (state.node == node_t::LOOP_1_1);
+        uint64_t totalConsumed = state.consumed + unsigned(state.data - beginData);
         state.consumed = 0;
-        return ret;
+        if (totalConsumed >= 1)
+        {
+            state.node = node_t::LOOP_1_1;
+            return true;
+        } else {
+            state.node = node_t::NO_STATE;
+            return false;
+        }
     }
     state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_2_0;
@@ -260,11 +264,16 @@ inline bool xml::range_3_0(state_t & state)
             state.data++;
             continue;
         }
-        state.consumed += unsigned(state.data - beginData);
-        state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
-        bool ret = (state.node == node_t::LOOP_1_1);
+        uint64_t totalConsumed = state.consumed + unsigned(state.data - beginData);
         state.consumed = 0;
-        return ret;
+        if (totalConsumed >= 1)
+        {
+            state.node = node_t::LOOP_1_1;
+            return true;
+        } else {
+            state.node = node_t::NO_STATE;
+            return false;
+        }
     }
     state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_3_0;
@@ -371,11 +380,16 @@ inline bool xml::range_5_0(state_t & state)
             continue;
         }
         xmlResult::payload(beginData, unsigned(state.data - beginData), !state.consumed, true);
-        state.consumed += unsigned(state.data - beginData);
-        state.node = (state.consumed >= 1) ? node_t::LOOP_1_1 : node_t::NO_STATE;
-        bool ret = (state.node == node_t::LOOP_1_1);
+        uint64_t totalConsumed = state.consumed + unsigned(state.data - beginData);
         state.consumed = 0;
-        return ret;
+        if (totalConsumed >= 1)
+        {
+            state.node = node_t::LOOP_1_1;
+            return true;
+        } else {
+            state.node = node_t::NO_STATE;
+            return false;
+        }
     }
     if (beginData < state.data)
         xmlResult::payload(beginData, unsigned(state.data - beginData), !state.consumed, false);
@@ -399,16 +413,12 @@ inline bool xml::loop_7_1(state_t & state)
 {
     if (state.data == state.end)
         return true;
-    state_t startState = state;
     if (text_8_0(state, true)) // case_1
         return true;
-    state = startState;
     if (text_11_0(state)) // case_2
         return true;
-    state = startState;
     if (string_12_0(state)) // case_3
         return true;
-    state = startState;
     state.node = node_t::NO_STATE;
     return true;
 }
@@ -539,10 +549,9 @@ inline bool xml::range_10_0(state_t & state)
             state.data++;
             continue;
         }
-        state.node = node_t::LOOP_8_1;
-        bool ret = (state.node == node_t::LOOP_8_1);
         state.consumed = 0;
-        return ret;
+        state.node = node_t::LOOP_8_1;
+        return true;
     }
     state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_10_0;
@@ -598,6 +607,21 @@ inline bool xml::string_11_1(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
+#ifdef __SSE4_2__
+        if(&state.data[16] <= state.end)
+        {
+            const __m128i s = _mm_set_epi8(0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E);
+            const __m128i d = _mm_loadu_si128((const __m128i *)state.data);
+            int r =  _mm_cmpistri(s, d, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ANY | _SIDD_LEAST_SIGNIFICANT);
+            if (r < 16)
+                state.data += r;
+            else
+            {
+                state.data += 16;
+                continue;
+            }
+        }
+#else // __SSE4_2__
         if(&state.data[16] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
@@ -638,17 +662,23 @@ inline bool xml::string_11_1(state_t & state)
                 continue;
             }
         }
+#endif // __SSE4_2__
         else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
         }
         _string_11_1(beginData, unsigned(state.data - beginData), state.consumed);
-        state.consumed += unsigned(state.data - beginData);
-        state.node = (state.consumed >= 1) ? node_t::RANGE_11_2 : node_t::NO_STATE;
-        bool ret = (state.node == node_t::RANGE_11_2);
+        uint64_t totalConsumed = state.consumed + unsigned(state.data - beginData);
         state.consumed = 0;
-        return ret;
+        if (totalConsumed >= 1)
+        {
+            state.node = node_t::RANGE_11_2;
+            return true;
+        } else {
+            state.node = node_t::NO_STATE;
+            return false;
+        }
     }
     if (beginData < state.data)
         _string_11_1(beginData, unsigned(state.data - beginData), state.consumed);
@@ -797,11 +827,16 @@ inline bool xml::string_12_0(state_t & state)
             continue;
         }
         _string_12_0(beginData, unsigned(state.data - beginData), state.consumed);
-        state.consumed += unsigned(state.data - beginData);
-        state.node = (state.consumed >= 1) ? node_t::FUNC_12_1 : node_t::NO_STATE;
-        bool ret = (state.node == node_t::FUNC_12_1);
+        uint64_t totalConsumed = state.consumed + unsigned(state.data - beginData);
         state.consumed = 0;
-        return ret;
+        if (totalConsumed >= 1)
+        {
+            state.node = node_t::FUNC_12_1;
+            return true;
+        } else {
+            state.node = node_t::NO_STATE;
+            return false;
+        }
     }
     if (beginData < state.data)
         _string_12_0(beginData, unsigned(state.data - beginData), state.consumed);
@@ -889,10 +924,9 @@ inline bool xml::range_12_2(state_t & state)
             state.data++;
             continue;
         }
-        state.node = node_t::LOOP_12_3;
-        bool ret = (state.node == node_t::LOOP_12_3);
         state.consumed = 0;
-        return ret;
+        state.node = node_t::LOOP_12_3;
+        return true;
     }
     state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_12_2;
@@ -903,16 +937,12 @@ inline bool xml::loop_12_3(state_t & state)
 {
     if (state.data == state.end)
         return true;
-    state_t startState = state;
     if (text_13_0(state)) // case_1
         return true;
-    state = startState;
     if (range_14_0(state)) // case_2
         return true;
-    state = startState;
     if (string_15_0(state)) // case_3
         return true;
-    state = startState;
     state.node = node_t::NO_STATE;
     return true;
 }
@@ -1099,11 +1129,16 @@ inline bool xml::string_15_0(state_t & state)
             continue;
         }
         _string_15_0(beginData, unsigned(state.data - beginData), state.consumed);
-        state.consumed += unsigned(state.data - beginData);
-        state.node = (state.consumed >= 1) ? node_t::RANGE_15_1 : node_t::NO_STATE;
-        bool ret = (state.node == node_t::RANGE_15_1);
+        uint64_t totalConsumed = state.consumed + unsigned(state.data - beginData);
         state.consumed = 0;
-        return ret;
+        if (totalConsumed >= 1)
+        {
+            state.node = node_t::RANGE_15_1;
+            return true;
+        } else {
+            state.node = node_t::NO_STATE;
+            return false;
+        }
     }
     if (beginData < state.data)
         _string_15_0(beginData, unsigned(state.data - beginData), state.consumed);
@@ -1179,10 +1214,9 @@ inline bool xml::range_15_1(state_t & state)
             state.data++;
             continue;
         }
-        state.node = node_t::TEXT_15_2;
-        bool ret = (state.node == node_t::TEXT_15_2);
         state.consumed = 0;
-        return ret;
+        state.node = node_t::TEXT_15_2;
+        return true;
     }
     state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_1;
@@ -1274,10 +1308,9 @@ inline bool xml::range_15_3(state_t & state)
             state.data++;
             continue;
         }
-        state.node = node_t::RANGE_15_4;
-        bool ret = (state.node == node_t::RANGE_15_4);
         state.consumed = 0;
-        return ret;
+        state.node = node_t::RANGE_15_4;
+        return true;
     }
     state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_3;
@@ -1353,6 +1386,21 @@ inline bool xml::string_15_5(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
+#ifdef __SSE4_2__
+        if(&state.data[16] <= state.end)
+        {
+            const __m128i s = _mm_set_epi8(0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27);
+            const __m128i d = _mm_loadu_si128((const __m128i *)state.data);
+            int r =  _mm_cmpistri(s, d, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ANY | _SIDD_LEAST_SIGNIFICANT);
+            if (r < 16)
+                state.data += r;
+            else
+            {
+                state.data += 16;
+                continue;
+            }
+        }
+#else // __SSE4_2__
         if(&state.data[16] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
@@ -1393,16 +1441,16 @@ inline bool xml::string_15_5(state_t & state)
                 continue;
             }
         }
+#endif // __SSE4_2__
         else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
             continue;
         }
         _string_15_5(beginData, unsigned(state.data - beginData), state.consumed);
-        state.node = node_t::RANGE_15_6;
-        bool ret = (state.node == node_t::RANGE_15_6);
         state.consumed = 0;
-        return ret;
+        state.node = node_t::RANGE_15_6;
+        return true;
     }
     if (beginData < state.data)
         _string_15_5(beginData, unsigned(state.data - beginData), state.consumed);
@@ -1523,10 +1571,9 @@ inline bool xml::range_15_8(state_t & state)
             state.data++;
             continue;
         }
-        state.node = node_t::LOOP_12_3;
-        bool ret = (state.node == node_t::LOOP_12_3);
         state.consumed = 0;
-        return ret;
+        state.node = node_t::LOOP_12_3;
+        return true;
     }
     state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_8;
@@ -1614,11 +1661,16 @@ inline bool xml::uint_17_0(state_t & state)
             continue;
         }
         _uint_17_0(beginData, unsigned(state.data - beginData), state.consumed);
-        state.consumed += unsigned(state.data - beginData);
-        state.node = (state.consumed >= 1) ? node_t::LOOP_17_0 : node_t::NO_STATE;
-        bool ret = (state.node == node_t::LOOP_17_0);
+        uint64_t totalConsumed = state.consumed + unsigned(state.data - beginData);
         state.consumed = 0;
-        return ret;
+        if (totalConsumed >= 1)
+        {
+            state.node = node_t::LOOP_17_0;
+            return true;
+        } else {
+            state.node = node_t::NO_STATE;
+            return false;
+        }
     }
     if (beginData < state.data)
         _uint_17_0(beginData, unsigned(state.data - beginData), state.consumed);
