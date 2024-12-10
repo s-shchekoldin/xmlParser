@@ -1,5 +1,5 @@
 // ==============================================================
-// Date: 2024-08-17 11:06:24 GMT
+// Date: 2024-08-17 12:08:56 GMT
 // Generated using vProto(2024.08.17)         https://www.vsyn.ru
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
@@ -20,7 +20,7 @@ struct xmlResult
     uint32_t opend = 0;
 
     // Don't forget to declare:
-    void payload(__attribute__((unused)) const char * data, __attribute__((unused)) unsigned len, __attribute__((unused)) bool isFirst, __attribute__((unused)) bool isLast);
+    void payload([[maybe_unused]] const char * data, [[maybe_unused]] unsigned len, [[maybe_unused]] bool isFirst, [[maybe_unused]] bool isLast);
     void finishTag();
     void getAttribute();
 };
