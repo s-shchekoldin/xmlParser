@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2024-08-17 12:08:56 GMT
-// Generated using vProto(2024.08.17)         https://www.vsyn.ru
+// Date: 2025-07-20 10:34:01 GMT
+// Generated using vProto(2025.07.20)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -8,9 +8,8 @@
 #define XML_H
 #pragma once
 
-#include <string>
-#include <vector>
 #include <cstdint>
+#include <string>
 
 struct xmlResult
 {
@@ -27,6 +26,7 @@ struct xmlResult
 
 struct xml : xmlResult
 {
+    template<class... Args> explicit xml(Args ... args) : xmlResult(args ...) {}
     bool parse(const char * data, unsigned len);
     bool parse(const std::string & data) { return parse(data.data(), data.length()); }
     void reset();
