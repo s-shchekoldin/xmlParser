@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-07-20 10:34:01 GMT
-// Generated using vProto(2025.07.20)        https://www.cgen.dev
+// Date: 2025-08-31 19:58:07 GMT
+// Generated using vProto(2025.08.31)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -8,6 +8,10 @@
 // To enable SSE4.2, use the compiler flag '-msse4.2' or '-march=native' (if the CPU supports it)
 #ifdef __SSE4_2__
 #include <immintrin.h>
+#endif
+// To enable SSE2, use the compiler flag '-msse2' or '-march=native' (if the CPU supports it)
+#ifdef __SSE2__
+#include <emmintrin.h>
 #endif
 
 inline void xml::parse(state_t & state)
@@ -607,21 +611,35 @@ inline bool xml::string_11_1(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
-#ifdef __SSE4_2__
+#ifdef __AVX2__
+        if(&state.data[32] <= state.end)
+        {
+            const __m256i d = _mm256_lddqu_si256((const __m256i *)state.data);
+            __m256i m = _mm256_cmpeq_epi8(_mm256_set1_epi8(0x3e), d);
+            uint32_t r = _mm256_movemask_epi8(m);
+            if (r)
+                state.data += __builtin_ctzl(r);
+            else
+            {
+                state.data += 32;
+                continue;
+            }
+        }
+#elif __SSE2__
         if(&state.data[16] <= state.end)
         {
-            const __m128i s = _mm_set_epi8(0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E, 0x3E);
             const __m128i d = _mm_loadu_si128((const __m128i *)state.data);
-            int r =  _mm_cmpistri(s, d, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ANY | _SIDD_LEAST_SIGNIFICANT);
-            if (r < 16)
-                state.data += r;
+            __m128i m = _mm_cmpeq_epi8(_mm_set1_epi8(0x3e), d);
+            uint16_t r = _mm_movemask_epi8(m);
+            if (r)
+                state.data += __builtin_ctz(r);
             else
             {
                 state.data += 16;
                 continue;
             }
         }
-#else // __SSE4_2__
+#else
         if(&state.data[16] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
@@ -662,7 +680,7 @@ inline bool xml::string_11_1(state_t & state)
                 continue;
             }
         }
-#endif // __SSE4_2__
+#endif
         else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
@@ -721,6 +739,7 @@ inline bool xml::range_11_2(state_t & state)
         state.node = node_t::FUNC_11_3;
         return true;
     }
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_11_2;
     return true;
 }
@@ -1005,6 +1024,7 @@ inline bool xml::range_14_0(state_t & state)
         state.node = node_t::TEXT_14_1;
         return true;
     }
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_14_0;
     return true;
 }
@@ -1351,6 +1371,7 @@ inline bool xml::range_15_4(state_t & state)
         state.node = node_t::STRING_15_5;
         return true;
     }
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_4;
     return true;
 }
@@ -1386,21 +1407,37 @@ inline bool xml::string_15_5(state_t & state)
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
     {
-#ifdef __SSE4_2__
+#ifdef __AVX2__
+        if(&state.data[32] <= state.end)
+        {
+            const __m256i d = _mm256_lddqu_si256((const __m256i *)state.data);
+            __m256i m = _mm256_cmpeq_epi8(_mm256_set1_epi8(0x22), d);
+            m = _mm256_or_si256(m, _mm256_cmpeq_epi8(_mm256_set1_epi8(0x27), d));
+            uint32_t r = _mm256_movemask_epi8(m);
+            if (r)
+                state.data += __builtin_ctzl(r);
+            else
+            {
+                state.data += 32;
+                continue;
+            }
+        }
+#elif __SSE2__
         if(&state.data[16] <= state.end)
         {
-            const __m128i s = _mm_set_epi8(0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27, 0x22, 0x27);
             const __m128i d = _mm_loadu_si128((const __m128i *)state.data);
-            int r =  _mm_cmpistri(s, d, _SIDD_UBYTE_OPS | _SIDD_CMP_EQUAL_ANY | _SIDD_LEAST_SIGNIFICANT);
-            if (r < 16)
-                state.data += r;
+            __m128i m = _mm_cmpeq_epi8(_mm_set1_epi8(0x22), d);
+            m = _mm_or_si128(m, _mm_cmpeq_epi8(_mm_set1_epi8(0x27), d));
+            uint16_t r = _mm_movemask_epi8(m);
+            if (r)
+                state.data += __builtin_ctz(r);
             else
             {
                 state.data += 16;
                 continue;
             }
         }
-#else // __SSE4_2__
+#else
         if(&state.data[16] <= state.end)
         {
             if (exitSym[uint8_t(state.data[0])]) [[unlikely]]
@@ -1441,7 +1478,7 @@ inline bool xml::string_15_5(state_t & state)
                 continue;
             }
         }
-#endif // __SSE4_2__
+#endif
         else if (!exitSym[uint8_t(state.data[0])]) [[unlikely]]
         {
             state.data++;
@@ -1493,6 +1530,7 @@ inline bool xml::range_15_6(state_t & state)
         state.node = node_t::NOTIFY_15_7;
         return true;
     }
+    state.consumed += unsigned(state.data - beginData);
     state.node = node_t::RANGE_15_6;
     return true;
 }

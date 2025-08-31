@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-07-20 10:34:01 GMT
-// Generated using vProto(2025.07.20)        https://www.cgen.dev
+// Date: 2025-08-31 19:58:07 GMT
+// Generated using vProto(2025.08.31)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
