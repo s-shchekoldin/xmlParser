@@ -1,5 +1,5 @@
 // ==============================================================
-// Date: 2025-09-04 06:13:37 GMT
+// Date: 2025-09-04 06:13:49 GMT
 // Generated using vProto(2025.09.04)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // autoSSE: 1 cpp98: 0 (SSE4.2: 0 AVX2: 1 SSE2: 1)
