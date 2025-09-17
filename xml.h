@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-09-04 06:13:49 GMT
-// Generated using vProto(2025.09.04)        https://www.cgen.dev
+// Date: 2025-09-17 08:30:45 GMT
+// Generated using vProto(2025.09.17)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -8,6 +8,7 @@
 #define XML_H
 #pragma once
 
+#include <array>
 #include <cstdint>
 #include <cstdio>
 #include <string>
@@ -64,7 +65,7 @@ private:
         uint64_t consumed = 0;
         node_t node = node_t::LOOP_1_0;
         unsigned retStackCount = 0;
-        node_t retStack[2];
+        std::array<node_t, 2> retStack;
 
         unsigned remainDataLen() const { return (unsigned)(end - data); }
         const char * name() const;

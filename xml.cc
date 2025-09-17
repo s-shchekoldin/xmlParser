@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-09-04 06:13:49 GMT
-// Generated using vProto(2025.09.04)        https://www.cgen.dev
+// Date: 2025-09-17 08:30:45 GMT
+// Generated using vProto(2025.09.17)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // autoSSE: 1 cpp98: 0 (SSE4.2: 0 AVX2: 1 SSE2: 1)
 // ==============================================================
@@ -129,7 +129,7 @@ inline bool xml::loop_1_1(state_t & state)
 
 inline bool xml::range_2_0(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true, false,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -212,7 +212,7 @@ inline bool xml::range_2_0(state_t & state)
 
 inline bool xml::range_3_0(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
         false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -314,13 +314,13 @@ inline bool xml::text_4_0(state_t & state)
 inline bool xml::goto_4_1(state_t & state)
 {
     state.node = node_t::LABEL_7_0;
-    if (state.retStackCount < sizeof(state.retStack)/sizeof(state.retStack[0]))
+    if (state.retStackCount < state.retStack.size())
         state.retStack[state.retStackCount++] = node_t::LOOP_1_1;
     else
     {
-        for(unsigned i = 1; i < sizeof(state.retStack)/sizeof(state.retStack[0]); i++)
+        for(unsigned i = 1; i < state.retStack.size(); i++)
             state.retStack[i - 1] = state.retStack[i];
-        state.retStack[sizeof(state.retStack)/sizeof(state.retStack[0]) - 1] = node_t::LOOP_1_1;
+        state.retStack[state.retStack.size() - 1] = node_t::LOOP_1_1;
     }
     return true;
 }
@@ -421,7 +421,7 @@ inline bool xml::loop_7_1(state_t & state)
 
 inline bool xml::text_8_0(state_t & state, bool isCaseCall)
 {
-    const static uint8_t text[] = { 0x21, 0x2d, 0x2d}; // !--
+    const static std::array<uint8_t, 3> text = {0x21, 0x2d, 0x2d}; // !--
     for(; state.data < state.end; state.data++)
     {
         if (text[state.consumed] != uint8_t(state.data[0]))
@@ -431,7 +431,7 @@ inline bool xml::text_8_0(state_t & state, bool isCaseCall)
             state.consumed = 0;
             return ret;
         }
-        else if (++state.consumed >= sizeof(text))
+        else if (++state.consumed >= text.size())
         {
             state.data++;
             state.consumed = 0;
@@ -450,7 +450,7 @@ inline bool xml::loop_8_1(state_t & state)
 
 inline bool xml::text_9_0(state_t & state, bool isCaseCall)
 {
-    const static uint8_t text[] = { 0x2d, 0x2d, 0x3e}; // -->
+    const static std::array<uint8_t, 3> text = {0x2d, 0x2d, 0x3e}; // -->
     for(; state.data < state.end; state.data++)
     {
         if (text[state.consumed] != uint8_t(state.data[0]))
@@ -460,7 +460,7 @@ inline bool xml::text_9_0(state_t & state, bool isCaseCall)
             state.consumed = 0;
             return ret;
         }
-        else if (++state.consumed >= sizeof(text))
+        else if (++state.consumed >= text.size())
         {
             state.data++;
             state.consumed = 0;
@@ -721,7 +721,7 @@ void xml::_string_12_0(const char * data, unsigned len, uint64_t consumed)
 
 inline bool xml::string_12_0(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
         false, false, false, false, false, false, false, false, false,  true, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
          true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
@@ -819,7 +819,7 @@ inline bool xml::func_12_1(state_t & state)
 
 inline bool xml::range_12_2(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
         false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -933,7 +933,7 @@ inline bool xml::ret_13_1(state_t & state)
 
 inline bool xml::range_14_0(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false, 
@@ -1024,7 +1024,7 @@ void xml::_string_15_0(const char * data, unsigned len, uint64_t consumed)
 
 inline bool xml::string_15_0(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
         false, false, false, false, false, false, false, false, false,  true, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
          true, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
@@ -1110,7 +1110,7 @@ inline bool xml::string_15_0(state_t & state)
 
 inline bool xml::range_15_1(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
         false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1204,7 +1204,7 @@ inline bool xml::text_15_2(state_t & state)
 
 inline bool xml::range_15_3(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
         false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1280,7 +1280,7 @@ inline bool xml::range_15_3(state_t & state)
 
 inline bool xml::range_15_4(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true, false,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1328,7 +1328,7 @@ void xml::_string_15_5(const char * data, unsigned len, uint64_t consumed)
 
 inline bool xml::string_15_5(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
         false, false,  true, false, false, false, false,  true, false, false, false, false, false, false, false, false, 
@@ -1439,7 +1439,7 @@ inline bool xml::string_15_5(state_t & state)
 
 inline bool xml::range_15_6(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true, false,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1485,7 +1485,7 @@ inline bool xml::notify_15_7(state_t & state)
 
 inline bool xml::range_15_8(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
         false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1574,7 +1574,7 @@ void xml::_uint_17_0(const char * data, unsigned len, uint64_t consumed)
 
 inline bool xml::uint_17_0(state_t & state)
 {
-    const static bool exitSym[256] = {
+    const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
