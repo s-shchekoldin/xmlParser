@@ -1,5 +1,5 @@
 // ==============================================================
-// Date: 2025-09-17 08:30:45 GMT
+// Date: 2025-09-17 18:46:08 GMT
 // Generated using vProto(2025.09.17)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // autoSSE: 1 cpp98: 0 (SSE4.2: 0 AVX2: 1 SSE2: 1)
@@ -45,8 +45,8 @@ inline void xml::parse(state_t & state)
             case node_t::LOOP_1_1: loop_1_1(state); break;
             case node_t::RANGE_2_0: range_2_0(state); break;
             case node_t::RANGE_3_0: range_3_0(state); break;
-            case node_t::TEXT_4_0: if (!text_4_0(state) || state.node != node_t::GOTO_4_1) break; [[fallthrough]];
-            case node_t::GOTO_4_1: goto_4_1(state); break;
+            case node_t::TEXT_4_0: if (!text_4_0(state) || state.node != node_t::CALL_4_1) break; [[fallthrough]];
+            case node_t::CALL_4_1: call_4_1(state); break;
             case node_t::RANGE_5_0: range_5_0(state); break;
             case node_t::LOOP_7_0: loop_7_0(state); break;
             case node_t::LABEL_7_0: if (!label_7_0(state) || state.node != node_t::LOOP_7_1) break; [[fallthrough]];
@@ -303,7 +303,7 @@ inline bool xml::text_4_0(state_t & state)
             return false;
         } else {
             state.data++;
-            state.node = node_t::GOTO_4_1;
+            state.node = node_t::CALL_4_1;
             return true;
         }
     }
@@ -311,7 +311,7 @@ inline bool xml::text_4_0(state_t & state)
     return true;
 }
 
-inline bool xml::goto_4_1(state_t & state)
+inline bool xml::call_4_1(state_t & state)
 {
     state.node = node_t::LABEL_7_0;
     if (state.retStackCount < state.retStack.size())
@@ -692,9 +692,13 @@ inline bool xml::_func_11_3()
 }
 inline bool xml::func_11_3(state_t & state)
 {
-    bool ret = _func_11_3();
-    state.node = ret ? node_t::NOTIFY_11_4 : node_t::NO_STATE;
-    return ret;
+    if (_func_11_3())
+    {
+        state.node = node_t::NOTIFY_11_4;
+        return true;
+    }
+    state.node = node_t::NO_STATE;
+    return false;
 }
 
 inline bool xml::notify_11_4(state_t & state)
@@ -812,9 +816,13 @@ inline bool xml::_func_12_1()
 }
 inline bool xml::func_12_1(state_t & state)
 {
-    bool ret = _func_12_1();
-    state.node = ret ? node_t::RANGE_12_2 : node_t::NO_STATE;
-    return ret;
+    if (_func_12_1())
+    {
+        state.node = node_t::RANGE_12_2;
+        return true;
+    }
+    state.node = node_t::NO_STATE;
+    return false;
 }
 
 inline bool xml::range_12_2(state_t & state)
@@ -995,9 +1003,13 @@ inline bool xml::_func_14_2()
 }
 inline bool xml::func_14_2(state_t & state)
 {
-    bool ret = _func_14_2();
-    state.node = ret ? node_t::NOTIFY_14_3 : node_t::NO_STATE;
-    return ret;
+    if (_func_14_2())
+    {
+        state.node = node_t::NOTIFY_14_3;
+        return true;
+    }
+    state.node = node_t::NO_STATE;
+    return false;
 }
 
 inline bool xml::notify_14_3(state_t & state)
@@ -1677,7 +1689,7 @@ const char * xml::state_t::name() const
         case node_t::RANGE_2_0: return "RANGE_2_0";
         case node_t::RANGE_3_0: return "RANGE_3_0";
         case node_t::TEXT_4_0: return "TEXT_4_0";
-        case node_t::GOTO_4_1: return "GOTO_4_1";
+        case node_t::CALL_4_1: return "CALL_4_1";
         case node_t::RANGE_5_0: return "RANGE_5_0";
         case node_t::LOOP_7_0: return "LOOP_7_0";
         case node_t::LABEL_7_0: return "LABEL_7_0";

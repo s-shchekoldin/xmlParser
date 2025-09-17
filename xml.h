@@ -1,5 +1,5 @@
 // ==============================================================
-// Date: 2025-09-17 08:30:45 GMT
+// Date: 2025-09-17 18:46:08 GMT
 // Generated using vProto(2025.09.17)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
@@ -41,7 +41,7 @@ private:
             LABEL_1_0, LOOP_1_1,
                 RANGE_2_0, 
                 RANGE_3_0, 
-                TEXT_4_0, GOTO_4_1, 
+                TEXT_4_0, CALL_4_1, 
                 RANGE_5_0, 
         LOOP_7_0, // line_7
             LABEL_7_0, LOOP_7_1,
@@ -79,7 +79,7 @@ private:
     bool range_2_0(state_t & state);
     bool range_3_0(state_t & state);
     bool text_4_0(state_t & state);
-    bool goto_4_1(state_t & state);
+    bool call_4_1(state_t & state);
     bool range_5_0(state_t & state);
     bool loop_7_0(state_t & state);
     bool label_7_0(state_t & state);
