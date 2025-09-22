@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-09-17 18:46:08 GMT
-// Generated using vProto(2025.09.17)        https://www.cgen.dev
+// Date: 2025-09-22 18:01:21 GMT
+// Generated using vProto(2025.09.22)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -73,55 +73,55 @@ private:
     state_t mainState;
 
     void parse(state_t & state);
-    bool loop_1_0(state_t & state);
-    bool label_1_0(state_t & state);
+    bool loop_1_0(state_t & state) const;
+    bool label_1_0(state_t & state) const;
     bool loop_1_1(state_t & state);
-    bool range_2_0(state_t & state);
-    bool range_3_0(state_t & state);
-    bool text_4_0(state_t & state);
-    bool call_4_1(state_t & state);
+    bool range_2_0(state_t & state) const;
+    bool range_3_0(state_t & state) const;
+    bool text_4_0(state_t & state) const;
+    bool call_4_1(state_t & state) const;
     bool range_5_0(state_t & state);
-    bool loop_7_0(state_t & state);
-    bool label_7_0(state_t & state);
+    bool loop_7_0(state_t & state) const;
+    bool label_7_0(state_t & state) const;
     bool loop_7_1(state_t & state);
-    bool text_8_0(state_t & state, bool isCaseCall);
-    bool loop_8_1(state_t & state);
-    bool text_9_0(state_t & state, bool isCaseCall);
-    bool ret_9_1(state_t & state);
-    bool range_10_0(state_t & state);
-    bool text_11_0(state_t & state);
+    bool text_8_0(state_t & state, bool isCaseCall) const;
+    bool loop_8_1(state_t & state) const;
+    bool text_9_0(state_t & state, bool isCaseCall) const;
+    bool ret_9_1(state_t & state) const;
+    bool range_10_0(state_t & state) const;
+    bool text_11_0(state_t & state) const;
     bool string_11_1(state_t & state);
     void _string_11_1(const char * data, unsigned len, uint64_t consumed);
-    bool range_11_2(state_t & state);
+    bool range_11_2(state_t & state) const;
     bool func_11_3(state_t & state);
     bool _func_11_3();
     bool notify_11_4(state_t & state);
-    bool ret_11_5(state_t & state);
+    bool ret_11_5(state_t & state) const;
     bool string_12_0(state_t & state);
     void _string_12_0(const char * data, unsigned len, uint64_t consumed);
     bool func_12_1(state_t & state);
     bool _func_12_1();
-    bool range_12_2(state_t & state);
+    bool range_12_2(state_t & state) const;
     bool loop_12_3(state_t & state);
-    bool text_13_0(state_t & state);
-    bool ret_13_1(state_t & state);
-    bool range_14_0(state_t & state);
-    bool text_14_1(state_t & state);
+    bool text_13_0(state_t & state) const;
+    bool ret_13_1(state_t & state) const;
+    bool range_14_0(state_t & state) const;
+    bool text_14_1(state_t & state) const;
     bool func_14_2(state_t & state);
     bool _func_14_2();
     bool notify_14_3(state_t & state);
-    bool ret_14_4(state_t & state);
+    bool ret_14_4(state_t & state) const;
     bool string_15_0(state_t & state);
     void _string_15_0(const char * data, unsigned len, uint64_t consumed);
-    bool range_15_1(state_t & state);
-    bool text_15_2(state_t & state);
-    bool range_15_3(state_t & state);
-    bool range_15_4(state_t & state);
+    bool range_15_1(state_t & state) const;
+    bool text_15_2(state_t & state) const;
+    bool range_15_3(state_t & state) const;
+    bool range_15_4(state_t & state) const;
     bool string_15_5(state_t & state);
     void _string_15_5(const char * data, unsigned len, uint64_t consumed);
-    bool range_15_6(state_t & state);
+    bool range_15_6(state_t & state) const;
     bool notify_15_7(state_t & state);
-    bool range_15_8(state_t & state);
+    bool range_15_8(state_t & state) const;
     bool loop_17_0(state_t & state);
     bool uint_17_0(state_t & state);
     void _uint_17_0(const char * data, unsigned len, uint64_t consumed);

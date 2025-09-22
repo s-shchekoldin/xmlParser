@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-09-17 18:46:08 GMT
-// Generated using vProto(2025.09.17)        https://www.cgen.dev
+// Date: 2025-09-22 18:01:21 GMT
+// Generated using vProto(2025.09.22)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // autoSSE: 1 cpp98: 0 (SSE4.2: 0 AVX2: 1 SSE2: 1)
 // ==============================================================
@@ -100,12 +100,12 @@ bool xml::parse(const char * data, unsigned len)
     return mainState.node != node_t::NO_STATE;
 }
 
-inline bool xml::loop_1_0(state_t & state)
+inline bool xml::loop_1_0(state_t & state) const
 {
     return label_1_0(state);
 }
 
-inline bool xml::label_1_0(state_t & state)
+inline bool xml::label_1_0(state_t & state) const
 {
     state.node = node_t::LOOP_1_1;
     return true;
@@ -127,7 +127,7 @@ inline bool xml::loop_1_1(state_t & state)
     return true;
 }
 
-inline bool xml::range_2_0(state_t & state)
+inline bool xml::range_2_0(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true, false,  true,  true, 
@@ -210,7 +210,7 @@ inline bool xml::range_2_0(state_t & state)
     return true;
 }
 
-inline bool xml::range_3_0(state_t & state)
+inline bool xml::range_3_0(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -293,7 +293,7 @@ inline bool xml::range_3_0(state_t & state)
     return true;
 }
 
-inline bool xml::text_4_0(state_t & state)
+inline bool xml::text_4_0(state_t & state) const
 {
     if(state.data < state.end)
     {
@@ -311,7 +311,7 @@ inline bool xml::text_4_0(state_t & state)
     return true;
 }
 
-inline bool xml::call_4_1(state_t & state)
+inline bool xml::call_4_1(state_t & state) const
 {
     state.node = node_t::LABEL_7_0;
     if (state.retStackCount < state.retStack.size())
@@ -394,12 +394,12 @@ inline bool xml::range_5_0(state_t & state)
     return true;
 }
 
-inline bool xml::loop_7_0(state_t & state)
+inline bool xml::loop_7_0(state_t & state) const
 {
     return label_7_0(state);
 }
 
-inline bool xml::label_7_0(state_t & state)
+inline bool xml::label_7_0(state_t & state) const
 {
     state.node = node_t::LOOP_7_1;
     return true;
@@ -419,7 +419,7 @@ inline bool xml::loop_7_1(state_t & state)
     return true;
 }
 
-inline bool xml::text_8_0(state_t & state, bool isCaseCall)
+inline bool xml::text_8_0(state_t & state, bool isCaseCall) const
 {
     const static std::array<uint8_t, 3> text = {0x21, 0x2d, 0x2d}; // !--
     for(; state.data < state.end; state.data++)
@@ -443,12 +443,12 @@ inline bool xml::text_8_0(state_t & state, bool isCaseCall)
     return true;
 }
 
-inline bool xml::loop_8_1(state_t & state)
+inline bool xml::loop_8_1(state_t & state) const
 {
     return text_9_0(state, false);
 }
 
-inline bool xml::text_9_0(state_t & state, bool isCaseCall)
+inline bool xml::text_9_0(state_t & state, bool isCaseCall) const
 {
     const static std::array<uint8_t, 3> text = {0x2d, 0x2d, 0x3e}; // -->
     for(; state.data < state.end; state.data++)
@@ -472,13 +472,13 @@ inline bool xml::text_9_0(state_t & state, bool isCaseCall)
     return true;
 }
 
-inline bool xml::ret_9_1(state_t & state)
+inline bool xml::ret_9_1(state_t & state) const
 {
     state.node = state.retStackCount ? state.retStack[--state.retStackCount] : node_t::NO_STATE;
     return state.node != node_t::NO_STATE;
 }
 
-inline bool xml::range_10_0(state_t & state)
+inline bool xml::range_10_0(state_t & state) const
 {
     const char * beginData = state.data;
     while(state.data < state.end) [[likely]]
@@ -537,7 +537,7 @@ inline bool xml::range_10_0(state_t & state)
     return true;
 }
 
-inline bool xml::text_11_0(state_t & state)
+inline bool xml::text_11_0(state_t & state) const
 {
     if(state.data < state.end)
     {
@@ -663,7 +663,7 @@ inline bool xml::string_11_1(state_t & state)
     return true;
 }
 
-inline bool xml::range_11_2(state_t & state)
+inline bool xml::range_11_2(state_t & state) const
 {
     const char * beginData = state.data;
     while(state.data < state.end)
@@ -708,7 +708,7 @@ inline bool xml::notify_11_4(state_t & state)
     return true;
 }
 
-inline bool xml::ret_11_5(state_t & state)
+inline bool xml::ret_11_5(state_t & state) const
 {
     state.node = state.retStackCount ? state.retStack[--state.retStackCount] : node_t::NO_STATE;
     return state.node != node_t::NO_STATE;
@@ -825,7 +825,7 @@ inline bool xml::func_12_1(state_t & state)
     return false;
 }
 
-inline bool xml::range_12_2(state_t & state)
+inline bool xml::range_12_2(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -915,7 +915,7 @@ inline bool xml::loop_12_3(state_t & state)
     return true;
 }
 
-inline bool xml::text_13_0(state_t & state)
+inline bool xml::text_13_0(state_t & state) const
 {
     if(state.data < state.end)
     {
@@ -933,13 +933,13 @@ inline bool xml::text_13_0(state_t & state)
     return true;
 }
 
-inline bool xml::ret_13_1(state_t & state)
+inline bool xml::ret_13_1(state_t & state) const
 {
     state.node = state.retStackCount ? state.retStack[--state.retStackCount] : node_t::NO_STATE;
     return state.node != node_t::NO_STATE;
 }
 
-inline bool xml::range_14_0(state_t & state)
+inline bool xml::range_14_0(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -978,7 +978,7 @@ inline bool xml::range_14_0(state_t & state)
     return true;
 }
 
-inline bool xml::text_14_1(state_t & state)
+inline bool xml::text_14_1(state_t & state) const
 {
     if(state.data < state.end)
     {
@@ -1019,7 +1019,7 @@ inline bool xml::notify_14_3(state_t & state)
     return true;
 }
 
-inline bool xml::ret_14_4(state_t & state)
+inline bool xml::ret_14_4(state_t & state) const
 {
     state.node = state.retStackCount ? state.retStack[--state.retStackCount] : node_t::NO_STATE;
     return state.node != node_t::NO_STATE;
@@ -1120,7 +1120,7 @@ inline bool xml::string_15_0(state_t & state)
     return true;
 }
 
-inline bool xml::range_15_1(state_t & state)
+inline bool xml::range_15_1(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -1196,7 +1196,7 @@ inline bool xml::range_15_1(state_t & state)
     return true;
 }
 
-inline bool xml::text_15_2(state_t & state)
+inline bool xml::text_15_2(state_t & state) const
 {
     if(state.data < state.end)
     {
@@ -1214,7 +1214,7 @@ inline bool xml::text_15_2(state_t & state)
     return true;
 }
 
-inline bool xml::range_15_3(state_t & state)
+inline bool xml::range_15_3(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -1290,7 +1290,7 @@ inline bool xml::range_15_3(state_t & state)
     return true;
 }
 
-inline bool xml::range_15_4(state_t & state)
+inline bool xml::range_15_4(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1449,7 +1449,7 @@ inline bool xml::string_15_5(state_t & state)
     return true;
 }
 
-inline bool xml::range_15_6(state_t & state)
+inline bool xml::range_15_6(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1495,7 +1495,7 @@ inline bool xml::notify_15_7(state_t & state)
     return true;
 }
 
-inline bool xml::range_15_8(state_t & state)
+inline bool xml::range_15_8(state_t & state) const
 {
     const static std::array<bool, 256> exitSym = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
