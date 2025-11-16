@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-09-22 18:01:21 GMT
-// Generated using vProto(2025.09.22)        https://www.cgen.dev
+// Date: 2025-11-16 07:23:23 GMT
+// Generated using vProto(2025.11.16)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -39,23 +39,23 @@ private:
     {
         LOOP_1_0, // line_1
             LABEL_1_0, LOOP_1_1,
-                RANGE_2_0, 
-                RANGE_3_0, 
-                TEXT_4_0, CALL_4_1, 
-                RANGE_5_0, 
+                RANGE_2_0,
+                RANGE_3_0,
+                TEXT_4_0, CALL_4_1,
+                RANGE_5_0,
         LOOP_7_0, // line_7
             LABEL_7_0, LOOP_7_1,
                 TEXT_8_0, LOOP_8_1,
-                    TEXT_9_0, RET_9_1, 
+                    TEXT_9_0, RET_9_1,
                  // catch:
-                    RANGE_10_0, 
-                TEXT_11_0, STRING_11_1, RANGE_11_2, FUNC_11_3, NOTIFY_11_4, RET_11_5, 
+                    RANGE_10_0,
+                TEXT_11_0, STRING_11_1, RANGE_11_2, FUNC_11_3, NOTIFY_11_4, RET_11_5,
                 STRING_12_0, FUNC_12_1, RANGE_12_2, LOOP_12_3,
-                    TEXT_13_0, RET_13_1, 
-                    RANGE_14_0, TEXT_14_1, FUNC_14_2, NOTIFY_14_3, RET_14_4, 
-                    STRING_15_0, RANGE_15_1, TEXT_15_2, RANGE_15_3, RANGE_15_4, STRING_15_5, RANGE_15_6, NOTIFY_15_7, RANGE_15_8, 
+                    TEXT_13_0, RET_13_1,
+                    RANGE_14_0, TEXT_14_1, FUNC_14_2, NOTIFY_14_3, RET_14_4,
+                    STRING_15_0, RANGE_15_1, TEXT_15_2, RANGE_15_3, RANGE_15_4, STRING_15_5, RANGE_15_6, NOTIFY_15_7, RANGE_15_8,
         LOOP_17_0, // line_17
-            UINT_17_0, 
+            UINT_17_0,
         NO_STATE
     };
     struct state_t
