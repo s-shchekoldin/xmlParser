@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2025-11-16 07:24:00 GMT
-// Generated using vProto(2025.11.16)        https://www.cgen.dev
+// Date: 2026-01-21 18:12:37 GMT
+// Generated using vProto(2026.01.21)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -28,102 +28,101 @@ struct xmlResult
 
 struct xml : xmlResult
 {
-    template<class... Args> explicit xml(Args ... args) : xmlResult(args ...) {}
+    template<class... Args> explicit xml(Args && ... args) : xmlResult(args ...) {}
     bool parse(const char * data, unsigned len);
     bool parse(const std::string & data) { return parse(data.data(), data.length()); }
+    bool empty() const { return mstate.node == NodeT::NoState; }
     void reset();
-    bool empty() const { return mainState.node == node_t::NO_STATE; }
 
 private:
-    enum class node_t
+    enum class NodeT
     {
-        LOOP_1_0, // line_1
-            LABEL_1_0, LOOP_1_1,
-                RANGE_2_0,
-                RANGE_3_0,
-                TEXT_4_0, CALL_4_1,
-                RANGE_5_0,
-        LOOP_7_0, // line_7
-            LABEL_7_0, LOOP_7_1,
-                TEXT_8_0, LOOP_8_1,
-                    TEXT_9_0, RET_9_1,
+        Loop1_0, // line_1
+            Label1_0, Loop1_1,
+                Range2_0,
+                Range3_0,
+                Text4_0, Call4_1,
+                Range5_0,
+        Loop7_0, // line_7
+            Label7_0, Loop7_1,
+                Text8_0, Loop8_1,
+                    Text9_0, Ret9_1,
                  // catch:
-                    RANGE_10_0,
-                TEXT_11_0, STRING_11_1, RANGE_11_2, FUNC_11_3, NOTIFY_11_4, RET_11_5,
-                STRING_12_0, FUNC_12_1, RANGE_12_2, LOOP_12_3,
-                    TEXT_13_0, RET_13_1,
-                    RANGE_14_0, TEXT_14_1, FUNC_14_2, NOTIFY_14_3, RET_14_4,
-                    STRING_15_0, RANGE_15_1, TEXT_15_2, RANGE_15_3, RANGE_15_4, STRING_15_5, RANGE_15_6, NOTIFY_15_7, RANGE_15_8,
-        LOOP_17_0, // line_17
-            UINT_17_0,
-        NO_STATE
+                    Range10_0,
+                Text11_0, String11_1, Range11_2, Func11_3, Notify11_4, Ret11_5,
+                String12_0, Func12_1, Range12_2, Loop12_3,
+                    Text13_0, Ret13_1,
+                    Range14_0, Text14_1, Func14_2, Notify14_3, Ret14_4,
+                    String15_0, Range15_1, Text15_2, Range15_3, Range15_4, String15_5, Range15_6, Notify15_7, Range15_8,
+        Loop17_0, // line_17
+            Uint17_0,
+        NoState
     };
-    struct state_t
+    struct StateT
     {
         const char * data = nullptr;
         const char * end = nullptr;
         uint64_t consumed = 0;
-        node_t node = node_t::LOOP_1_0;
-        unsigned retStackCount = 0;
-        std::array<node_t, 2> retStack;
-
-        unsigned remainDataLen() const { return (unsigned)(end - data); }
+        NodeT node = NodeT::Loop1_0;
+        unsigned rcount = 0;
+        std::array<NodeT, 2> rstack;
+        unsigned remain() const { return unsigned(end - data); }
         const char * name() const;
     };
-    state_t mainState;
+    StateT mstate;
 
-    void parse(state_t & state);
-    bool loop_1_0(state_t & state) const;
-    bool label_1_0(state_t & state) const;
-    bool loop_1_1(state_t & state);
-    bool range_2_0(state_t & state) const;
-    bool range_3_0(state_t & state) const;
-    bool text_4_0(state_t & state) const;
-    bool call_4_1(state_t & state) const;
-    bool range_5_0(state_t & state);
-    bool loop_7_0(state_t & state) const;
-    bool label_7_0(state_t & state) const;
-    bool loop_7_1(state_t & state);
-    bool text_8_0(state_t & state, bool isCaseCall) const;
-    bool loop_8_1(state_t & state) const;
-    bool text_9_0(state_t & state, bool isCaseCall) const;
-    bool ret_9_1(state_t & state) const;
-    bool range_10_0(state_t & state) const;
-    bool text_11_0(state_t & state) const;
-    bool string_11_1(state_t & state);
-    void _string_11_1(const char * data, unsigned len, uint64_t consumed);
-    bool range_11_2(state_t & state) const;
-    bool func_11_3(state_t & state);
-    bool _func_11_3();
-    bool notify_11_4(state_t & state);
-    bool ret_11_5(state_t & state) const;
-    bool string_12_0(state_t & state);
-    void _string_12_0(const char * data, unsigned len, uint64_t consumed);
-    bool func_12_1(state_t & state);
-    bool _func_12_1();
-    bool range_12_2(state_t & state) const;
-    bool loop_12_3(state_t & state);
-    bool text_13_0(state_t & state) const;
-    bool ret_13_1(state_t & state) const;
-    bool range_14_0(state_t & state) const;
-    bool text_14_1(state_t & state) const;
-    bool func_14_2(state_t & state);
-    bool _func_14_2();
-    bool notify_14_3(state_t & state);
-    bool ret_14_4(state_t & state) const;
-    bool string_15_0(state_t & state);
-    void _string_15_0(const char * data, unsigned len, uint64_t consumed);
-    bool range_15_1(state_t & state) const;
-    bool text_15_2(state_t & state) const;
-    bool range_15_3(state_t & state) const;
-    bool range_15_4(state_t & state) const;
-    bool string_15_5(state_t & state);
-    void _string_15_5(const char * data, unsigned len, uint64_t consumed);
-    bool range_15_6(state_t & state) const;
-    bool notify_15_7(state_t & state);
-    bool range_15_8(state_t & state) const;
-    bool loop_17_0(state_t & state);
-    bool uint_17_0(state_t & state);
-    void _uint_17_0(const char * data, unsigned len, uint64_t consumed);
+    void parse(StateT & state);
+    bool loop1_0(StateT & state) const;
+    bool label1_0(StateT & state) const;
+    bool loop1_1(StateT & state);
+    bool range2_0(StateT & state) const;
+    bool range3_0(StateT & state) const;
+    bool text4_0(StateT & state) const;
+    bool call4_1(StateT & state) const;
+    bool range5_0(StateT & state);
+    bool loop7_0(StateT & state) const;
+    bool label7_0(StateT & state) const;
+    bool loop7_1(StateT & state);
+    bool text8_0(StateT & state, bool is_branch) const;
+    bool loop8_1(StateT & state) const;
+    bool text9_0(StateT & state, bool is_branch) const;
+    bool ret9_1(StateT & state) const;
+    bool range10_0(StateT & state) const;
+    bool text11_0(StateT & state) const;
+    bool string11_1(StateT & state);
+    void string11_1(const char * data, unsigned len, uint64_t consumed);
+    bool range11_2(StateT & state) const;
+    bool func11_3(StateT & state);
+    bool func11_3();
+    bool notify11_4(StateT & state);
+    bool ret11_5(StateT & state) const;
+    bool string12_0(StateT & state);
+    void string12_0(const char * data, unsigned len, uint64_t consumed);
+    bool func12_1(StateT & state);
+    bool func12_1();
+    bool range12_2(StateT & state) const;
+    bool loop12_3(StateT & state);
+    bool text13_0(StateT & state) const;
+    bool ret13_1(StateT & state) const;
+    bool range14_0(StateT & state) const;
+    bool text14_1(StateT & state) const;
+    bool func14_2(StateT & state);
+    bool func14_2();
+    bool notify14_3(StateT & state);
+    bool ret14_4(StateT & state) const;
+    bool string15_0(StateT & state);
+    void string15_0(const char * data, unsigned len, uint64_t consumed);
+    bool range15_1(StateT & state) const;
+    bool text15_2(StateT & state) const;
+    bool range15_3(StateT & state) const;
+    bool range15_4(StateT & state) const;
+    bool string15_5(StateT & state);
+    void string15_5(const char * data, unsigned len, uint64_t consumed);
+    bool range15_6(StateT & state) const;
+    bool notify15_7(StateT & state);
+    bool range15_8(StateT & state) const;
+    bool loop17_0(StateT & state);
+    bool uint17_0(StateT & state);
+    void uint17_0(const char * data, unsigned len, uint64_t consumed);
 };
 #endif
