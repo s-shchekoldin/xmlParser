@@ -1,13 +1,13 @@
 // ==============================================================
-// Date: 2026-04-18 16:57:42 GMT
-// Generated using vProto(2026.04.18)        https://www.cgen.dev
+// Date: 2026-04-28 17:05:32 GMT
+// Generated using vProto(2026.04.28)        https://www.cgen.dev
 // Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
 // ==============================================================
 
 // Example usage:
 // let mut m = crate::XmlRust::XmlRust::<XmlRust::XmlRustExample>::new();
 // m.parse(&byte_slice);
-// If necessary, override XmlRust::XmlRustExample and its trait as well
+// Also, you can redefine XmlRustTrait implementation for interacting with the XmlRust module.
 
 
 #[cfg(target_arch = "x86_64")]
@@ -62,17 +62,25 @@ impl std::fmt::Display for StateT {
     }
 }
 
+#[allow(unreachable_code)]
 pub trait XmlRustTrait {
     fn new() -> Self;
+
     // field accessors:
     fn key(&mut self) -> &mut String;
     fn opend(&mut self) -> &mut u32;
     fn tag(&mut self) -> &mut String;
     fn value(&mut self) -> &mut String;
+
     // callbacks to be implemented by the user:
-    fn payload(&mut self, data: &[u8], is_first: bool, is_last: bool);
-    fn finishTag(&mut self);
-    fn getAttribute(&mut self);
+    fn payload(&mut self, data: &[u8], is_first: bool, is_last: bool) { println!("payload({}:{})={:X?}", is_first, is_last, data); }
+    fn finishTag(&mut self) { println!("Notify::finishTag"); }
+    fn getAttribute(&mut self) { println!("Notify::getAttribute"); }
+
+    // private functions:
+    fn _func11_3(&mut self) -> bool {  let tmp = *self.opend(); *self.opend() -= 1; return tmp > 0;  return true; }
+    fn _func12_1(&mut self) -> bool {  *self.opend() += 1;  return true; }
+    fn _func14_2(&mut self) -> bool {  let tmp = *self.opend(); *self.opend() -= 1; return tmp > 0;  return true; }
 }
 
 pub struct XmlRustExample
@@ -87,11 +95,8 @@ impl XmlRustTrait for XmlRustExample {
     fn new() -> Self { Self{key: String::new(), tag: String::new(), value: String::new(), opend: 0} }
     fn key(&mut self) -> &mut String { &mut self.key }
     fn opend(&mut self) -> &mut u32 { &mut self.opend }
-    fn payload(&mut self, data: &[u8], is_first: bool, is_last: bool) { println!("payload({}:{})={:X?}", is_first, is_last, data); }
     fn tag(&mut self) -> &mut String { &mut self.tag }
     fn value(&mut self) -> &mut String { &mut self.value }
-    fn finishTag(&mut self) { println!("Notify::finishTag"); }
-    fn getAttribute(&mut self) { println!("Notify::getAttribute"); }
 }
 
 pub struct XmlRust <T> {
@@ -717,14 +722,8 @@ impl <T: XmlRustTrait> XmlRust<T> {
         state.node = NodeT::Range11_2;
         return true;
     }
-    #[allow(unused_variables)]
-    #[allow(unreachable_code)]
-    fn _func11_3(this : &mut T) -> bool {
-         let tmp = *this.opend(); *this.opend() -= 1; return tmp > 0; 
-        return true;
-    }
     fn func11_3(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        if Self::_func11_3(&mut self.output) {
+        if self.output._func11_3() {
             state.node = NodeT::Notify11_4;
             return true;
         }
@@ -827,14 +826,8 @@ impl <T: XmlRustTrait> XmlRust<T> {
         state.node = NodeT::String12_0;
         return true;
     }
-    #[allow(unused_variables)]
-    #[allow(unreachable_code)]
-    fn _func12_1(this : &mut T) -> bool {
-         *this.opend() += 1; 
-        return true;
-    }
     fn func12_1(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        if Self::_func12_1(&mut self.output) {
+        if self.output._func12_1() {
             state.node = NodeT::Range12_2;
             return true;
         }
@@ -992,14 +985,8 @@ impl <T: XmlRustTrait> XmlRust<T> {
         state.node = NodeT::Text14_1;
         return true;
     }
-    #[allow(unused_variables)]
-    #[allow(unreachable_code)]
-    fn _func14_2(this : &mut T) -> bool {
-         let tmp = *this.opend(); *this.opend() -= 1; return tmp > 0; 
-        return true;
-    }
     fn func14_2(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        if Self::_func14_2(&mut self.output) {
+        if self.output._func14_2() {
             state.node = NodeT::Notify14_3;
             return true;
         }
