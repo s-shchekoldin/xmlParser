@@ -1,11 +1,11 @@
-I inspected `xmlParser01.zip`. The C++ project builds cleanly and the included behavior tests pass. I also ran a small no-op-callback benchmark by repeating `input.txt`; absolute numbers are machine/container-specific, but the relative trends are useful.
+I inspected `xmlParser01.zip`. The C++ project builds cleanly and the included behavior tests pass. I also ran a no-op/counting-callback benchmark by repeating `input.txt`; absolute numbers are machine/container-specific, but the relative trends are useful. The table now includes original `HEAD` code measured from a temp build and the implemented C++ changes measured on 2026-05-01 with `xmlBenchmark input.txt 500000 ...`.
 
 | Variant tested locally | Full-buffer parse | 4 KiB chunks | 1-byte chunks | Takeaway |
 |---|---:|---:|---:|---|
-| Current C++ code, `-O3 -march=native` | ~791 MiB/s | ~790 MiB/s | ~95 MiB/s | Baseline |
-| Current code + GCC PGO | ~1051 MiB/s | ~1069 MiB/s | ~118 MiB/s | Biggest low-risk build-level win |
-| Dispatch-by-first-byte + simpler whitespace scans | ~909 MiB/s | ~908 MiB/s | ~102 MiB/s | Best pure codegen-style change I tested |
-| Dispatch/whitespace + PGO | ~1016 MiB/s | ~1004 MiB/s | ~122 MiB/s | Strong for fragmented input |
+| Original C++ code, `-O3 -march=native` | ~1090 MiB/s | ~1116 MiB/s | ~157 MiB/s | Same benchmark harness, no PGO |
+| Original C++ code + GCC PGO | ~1396 MiB/s | ~1475 MiB/s | ~194 MiB/s | Same benchmark harness, trained in a temp build |
+| Implemented dispatch/whitespace changes | ~1190 MiB/s | ~1198 MiB/s | ~165 MiB/s | Current code, no PGO |
+| Implemented dispatch/whitespace + GCC PGO | ~1470 MiB/s | ~1513 MiB/s | ~193 MiB/s | Current code, trained with the benchmark target |
 
 GCC documents that `-O3` enables additional optimizations beyond `-O2`, `-march=native` enables instruction subsets supported by the build machine and may reduce portability, `-fprofile-generate`/`-fprofile-use` enable profile-guided optimization, and `-flto` enables link-time optimization across translation units. CMake also has a target property for interprocedural optimization.
 
@@ -30,28 +30,29 @@ std::fwrite(data, 1, len, stdout);
 
 For real benchmarking, make callbacks no-op or count bytes/events only.
 
+Implemented: `main.cc` now uses `std::fwrite`, and `xml_bench.cc` provides no-op/counting callbacks for parser timing.
+
 ---
 
 ### 2. Add PGO before changing much code
 
 For this state-machine parser, branch probabilities matter. PGO is well-suited because the parser has many small states and predictable hot paths.
 
-Example flow:
+Implemented CMake flow:
 
-```bash
-# Build instrumented binary
-g++ -std=c++17 -O3 -march=native -fprofile-generate=./pgo \
-    xml.cc bench.cc -o bench_pgo
+```powershell
+cmake -B .\build -DXML_PGO_MODE=GENERATE
+cmake --build .\build --target xmlBenchmark
+.\build\xmlBenchmark.exe input.txt 500000 full
+.\build\xmlBenchmark.exe input.txt 500000 4096
+.\build\xmlBenchmark.exe input.txt 500000 1
 
-# Run representative XML workloads
-./bench_pgo
-
-# Rebuild using collected profile
-g++ -std=c++17 -O3 -march=native -fprofile-use=./pgo -fprofile-correction \
-    xml.cc bench.cc -o bench_pgo
+cmake -B .\build -DXML_PGO_MODE=USE
+cmake --build .\build --target xmlBehaviorTests xmlBenchmark xmlParser
+ctest --test-dir .\build --output-on-failure
 ```
 
-With the current `-Werror`, watch for `-Wmissing-profile` if target names or paths differ between the training build and the optimized build. Either keep names identical or avoid making that warning fatal during the profile-use build.
+`XML_PGO_DIR` defaults to `build/pgo`. In `USE` mode, CMake adds `-Wno-error=missing-profile` so untrained targets such as `xmlParser` or `xmlBehaviorTests` can warn without failing the build.
 
 ---
 
@@ -304,6 +305,38 @@ If arbitrary bytes are allowed, store `Vec<u8>` or a fixed `[u8; 256]` token ins
 
 For Rust scanning, the `memchr` crate provides optimized 1-, 2-, and 3-byte search routines and documents SIMD support on major targets; Rust’s `std::arch`/`core::arch` intrinsics are available but non-portable and target-feature-gated.
 
-## My suggested order of work
+## Implemented order of work
 
-Start with benchmark hygiene: no `printf` per byte, representative input sizes, full-buffer and fragmented modes. Then try PGO. After that, change generated dispatch to first-byte routing and simplify `[ \t]*` scans. Only then spend time on SIMD or replacing `std::string`, because those changes are more workload-sensitive and more likely to affect API compatibility.
+- [x] Benchmark hygiene: replaced per-byte payload printing in `main.cc` with `std::fwrite`.
+- [x] Reproducible benchmark target: added `xmlBenchmark`, with file path, repeat count, and `full` or numeric chunk-size arguments.
+- [x] CMake PGO workflow: added `XML_PGO_MODE=OFF|GENERATE|USE` and `XML_PGO_DIR`.
+- [x] Parser dispatch: changed `loop1_1`, `loop7_1`, and `loop12_3` to first-byte routing while keeping full-buffer fallback for `<!not-comment>` and `/` or `?` attribute keys.
+- [x] Whitespace scans: simplified `range3_0`, `range12_2`, `range15_1`, `range15_3`, and `range15_8` to direct space/tab loops.
+- [x] Depth safety: replaced `return opend--;` with explicit zero checks and decrement logic.
+- [x] Tests: expanded behavior coverage for whitespace fragmentation, ambiguous branch fallback, and unmatched close-tag depth underflow.
+
+Commands used for the final measurements:
+
+```powershell
+cmake -B .\build -DXML_PGO_MODE=OFF
+cmake --build .\build --target xmlBehaviorTests xmlBenchmark xmlParser
+ctest --test-dir .\build --output-on-failure
+.\build\xmlBenchmark.exe input.txt 500000 full
+.\build\xmlBenchmark.exe input.txt 500000 4096
+.\build\xmlBenchmark.exe input.txt 500000 1
+
+cmake -B .\build -DXML_PGO_MODE=GENERATE
+cmake --build .\build --target xmlBehaviorTests xmlBenchmark
+.\build\xmlBenchmark.exe input.txt 500000 full
+.\build\xmlBenchmark.exe input.txt 500000 4096
+.\build\xmlBenchmark.exe input.txt 500000 1
+
+cmake -B .\build -DXML_PGO_MODE=USE
+cmake --build .\build --target xmlBehaviorTests xmlBenchmark xmlParser
+ctest --test-dir .\build --output-on-failure
+.\build\xmlBenchmark.exe input.txt 500000 full
+.\build\xmlBenchmark.exe input.txt 500000 4096
+.\build\xmlBenchmark.exe input.txt 500000 1
+```
+
+Still deferred: SIMD scanner work, replacing `std::string` tokens with fixed buffers, Rust parser changes, and LTO/IPO tuning.

@@ -306,6 +306,8 @@ void testFailureRecoveryAndPartialInput()
     clearEvents();
     require(!parser.parse("</root>"), "unmatched closing tag unexpectedly parsed");
     require(parser.empty(), "parser should be empty after unmatched closing tag");
+    require(parser.opend == 0, "unmatched closing tag underflowed depth");
+    require(g_events.empty(), "unmatched closing tag emitted events");
 
     parser.reset();
     clearEvents();
@@ -341,6 +343,34 @@ void testStringLimits()
     require(controls[1].kind == EventKind::FinishTag, "limit second control should be a finish tag");
     require(controls[1].tag == longTag.substr(0, 256), "tag was not truncated to 256 bytes on close");
     require(controls[1].depth == 0, "limit close depth mismatch");
+}
+
+void testOptimizedBranchCoverage()
+{
+    const std::string whitespaceInput = " \t<root \t alpha \t = \t \"1\" \t>payload</root>\t";
+    std::vector<Event> events = parseInChunks(whitespaceInput, std::vector<std::size_t>(1, 1));
+    requireControlsEqual(controlEvents(events), std::vector<Event>{
+        attributeEvent("root", "alpha", "1"),
+        finishEvent("root", 0)
+    });
+    require(payloads(events).size() == 1 && payloads(events)[0] == "payload",
+        "one-byte whitespace coverage payload mismatch");
+
+    const std::string notCommentInput = "<!not-comment>x</!not-comment>";
+    events = parseInChunks(notCommentInput, std::vector<std::size_t>(1, notCommentInput.size()));
+    requireControlsEqual(controlEvents(events), std::vector<Event>(1, finishEvent("!not-comment", 0)));
+    require(payloads(events).size() == 1 && payloads(events)[0] == "x",
+        "not-comment fallback payload mismatch");
+
+    const std::string ambiguousAttributeInput = "<root /attr=\"slash\" ?attr='question'>x</root>";
+    events = parseInChunks(ambiguousAttributeInput, std::vector<std::size_t>(1, ambiguousAttributeInput.size()));
+    requireControlsEqual(controlEvents(events), std::vector<Event>{
+        attributeEvent("root", "/attr", "slash"),
+        attributeEvent("root", "?attr", "question"),
+        finishEvent("root", 0)
+    });
+    require(payloads(events).size() == 1 && payloads(events)[0] == "x",
+        "ambiguous attribute fallback payload mismatch");
 }
 
 struct TestCase
@@ -387,7 +417,8 @@ int main()
         {"fragmentation matches full input", testFragmentationMatchesFullInput},
         {"grammar coverage", testGrammarCoverage},
         {"failure recovery and partial input", testFailureRecoveryAndPartialInput},
-        {"string limits", testStringLimits}
+        {"string limits", testStringLimits},
+        {"optimized branch coverage", testOptimizedBranchCoverage}
     };
 
     int failures = 0;
