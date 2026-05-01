@@ -124,16 +124,15 @@ ALWAYS_INLINE bool xml::loop1_1(StateT & state)
 {
     if (state.data == state.end)
         return true;
-    if (range2_0(state)) // case_1
-        return true;
-    if (range3_0(state)) // case_2
-        return true;
-    if (text4_0(state)) // case_3
-        return true;
-    if (range5_0(state)) // case_4
-        return true;
-    state.node = NodeT::NoState;
-    return true;
+
+    const uint8_t c = uint8_t(state.data[0]);
+    if (c == uint8_t('\r') || c == uint8_t('\n'))
+        return range2_0(state);
+    if (c == uint8_t(' ') || c == uint8_t('\t'))
+        return range3_0(state);
+    if (c == uint8_t('<'))
+        return text4_0(state);
+    return range5_0(state);
 }
 
 ALWAYS_INLINE bool xml::range2_0(StateT & state) const
@@ -221,85 +220,27 @@ ALWAYS_INLINE bool xml::range2_0(StateT & state) const
 
 ALWAYS_INLINE bool xml::range3_0(StateT & state) const
 {
-    const static std::array<bool, 256> terminator = {
-         true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-        false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * datastart = state.data;
-    while(state.data < state.end) [[likely]]
+    while (state.data < state.end && (state.data[0] == ' ' || state.data[0] == '\t'))
+        ++state.data;
+
+    if (state.data == state.end)
     {
-        if(&state.data[16] <= state.end)
-        {
-            if (terminator[uint8_t(state.data[0])]) [[unlikely]]
-                state.data += 0;
-            else if (terminator[uint8_t(state.data[1])]) [[unlikely]]
-                state.data += 1;
-            else if (terminator[uint8_t(state.data[2])]) [[unlikely]]
-                state.data += 2;
-            else if (terminator[uint8_t(state.data[3])]) [[unlikely]]
-                state.data += 3;
-            else if (terminator[uint8_t(state.data[4])]) [[unlikely]]
-                state.data += 4;
-            else if (terminator[uint8_t(state.data[5])]) [[unlikely]]
-                state.data += 5;
-            else if (terminator[uint8_t(state.data[6])]) [[unlikely]]
-                state.data += 6;
-            else if (terminator[uint8_t(state.data[7])]) [[unlikely]]
-                state.data += 7;
-            else if (terminator[uint8_t(state.data[8])]) [[unlikely]]
-                state.data += 8;
-            else if (terminator[uint8_t(state.data[9])]) [[unlikely]]
-                state.data += 9;
-            else if (terminator[uint8_t(state.data[10])]) [[unlikely]]
-                state.data += 10;
-            else if (terminator[uint8_t(state.data[11])]) [[unlikely]]
-                state.data += 11;
-            else if (terminator[uint8_t(state.data[12])]) [[unlikely]]
-                state.data += 12;
-            else if (terminator[uint8_t(state.data[13])]) [[unlikely]]
-                state.data += 13;
-            else if (terminator[uint8_t(state.data[14])]) [[unlikely]]
-                state.data += 14;
-            else if (terminator[uint8_t(state.data[15])]) [[unlikely]]
-                state.data += 15;
-            else
-            {
-                state.data += 16;
-                continue;
-            }
-        }
-        else if (!(terminator[uint8_t(state.data[0])])) [[unlikely]]
-        {
-            state.data++;
-            continue;
-        }
-        uint64_t total = state.consumed + unsigned(state.data - datastart);
-        state.consumed = 0;
-        if (total >= 1)
-        {
-            state.node = NodeT::Loop1_1;
-            return true;
-        } else {
-            state.node = NodeT::NoState;
-            return false;
-        }
+        state.consumed += unsigned(state.data - datastart);
+        state.node = NodeT::Range3_0;
+        return true;
     }
-    state.consumed += unsigned(state.data - datastart);
-    state.node = NodeT::Range3_0;
-    return true;
+
+    uint64_t total = state.consumed + unsigned(state.data - datastart);
+    state.consumed = 0;
+    if (total >= 1)
+    {
+        state.node = NodeT::Loop1_1;
+        return true;
+    }
+
+    state.node = NodeT::NoState;
+    return false;
 }
 
 ALWAYS_INLINE bool xml::text4_0(StateT & state) const
@@ -418,14 +359,24 @@ ALWAYS_INLINE bool xml::loop7_1(StateT & state)
 {
     if (state.data == state.end)
         return true;
-    if (text8_0(state, true)) // case_1
+
+    const uint8_t c = uint8_t(state.data[0]);
+    if (c == uint8_t('!'))
+    {
+        if (state.remain() < 3)
+            return text8_0(state, true);
+        if (uint8_t(state.data[1]) == uint8_t('-') && uint8_t(state.data[2]) == uint8_t('-'))
+            return text8_0(state, true);
+        return string12_0(state);
+    }
+    if (c == uint8_t('/'))
+        return text11_0(state);
+    if (c == uint8_t('>') || c == uint8_t(' ') || c == uint8_t('\t'))
+    {
+        state.node = NodeT::NoState;
         return true;
-    if (text11_0(state)) // case_2
-        return true;
-    if (string12_0(state)) // case_3
-        return true;
-    state.node = NodeT::NoState;
-    return true;
+    }
+    return string12_0(state);
 }
 
 ALWAYS_INLINE bool xml::text8_0(StateT & state, bool is_branch) const
@@ -701,7 +652,9 @@ ALWAYS_INLINE bool xml::range11_2(StateT & state) const
 
 ALWAYS_INLINE bool xml::func11_3()
 {
-     return opend--; 
+    if (opend == 0)
+        return false;
+    --opend;
     return true;
 }
 ALWAYS_INLINE bool xml::func11_3(StateT & state)
@@ -841,77 +794,19 @@ ALWAYS_INLINE bool xml::func12_1(StateT & state)
 
 ALWAYS_INLINE bool xml::range12_2(StateT & state) const
 {
-    const static std::array<bool, 256> terminator = {
-         true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-        false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * datastart = state.data;
-    while(state.data < state.end) [[likely]]
+    while (state.data < state.end && (state.data[0] == ' ' || state.data[0] == '\t'))
+        ++state.data;
+
+    if (state.data == state.end)
     {
-        if(&state.data[16] <= state.end)
-        {
-            if (terminator[uint8_t(state.data[0])]) [[unlikely]]
-                state.data += 0;
-            else if (terminator[uint8_t(state.data[1])]) [[unlikely]]
-                state.data += 1;
-            else if (terminator[uint8_t(state.data[2])]) [[unlikely]]
-                state.data += 2;
-            else if (terminator[uint8_t(state.data[3])]) [[unlikely]]
-                state.data += 3;
-            else if (terminator[uint8_t(state.data[4])]) [[unlikely]]
-                state.data += 4;
-            else if (terminator[uint8_t(state.data[5])]) [[unlikely]]
-                state.data += 5;
-            else if (terminator[uint8_t(state.data[6])]) [[unlikely]]
-                state.data += 6;
-            else if (terminator[uint8_t(state.data[7])]) [[unlikely]]
-                state.data += 7;
-            else if (terminator[uint8_t(state.data[8])]) [[unlikely]]
-                state.data += 8;
-            else if (terminator[uint8_t(state.data[9])]) [[unlikely]]
-                state.data += 9;
-            else if (terminator[uint8_t(state.data[10])]) [[unlikely]]
-                state.data += 10;
-            else if (terminator[uint8_t(state.data[11])]) [[unlikely]]
-                state.data += 11;
-            else if (terminator[uint8_t(state.data[12])]) [[unlikely]]
-                state.data += 12;
-            else if (terminator[uint8_t(state.data[13])]) [[unlikely]]
-                state.data += 13;
-            else if (terminator[uint8_t(state.data[14])]) [[unlikely]]
-                state.data += 14;
-            else if (terminator[uint8_t(state.data[15])]) [[unlikely]]
-                state.data += 15;
-            else
-            {
-                state.data += 16;
-                continue;
-            }
-        }
-        else if (!(terminator[uint8_t(state.data[0])])) [[unlikely]]
-        {
-            state.data++;
-            continue;
-        }
-        state.consumed = 0;
-        state.node = NodeT::Loop12_3;
+        state.consumed += unsigned(state.data - datastart);
+        state.node = NodeT::Range12_2;
         return true;
     }
-    state.consumed += unsigned(state.data - datastart);
-    state.node = NodeT::Range12_2;
+
+    state.consumed = 0;
+    state.node = NodeT::Loop12_3;
     return true;
 }
 
@@ -919,14 +814,19 @@ ALWAYS_INLINE bool xml::loop12_3(StateT & state)
 {
     if (state.data == state.end)
         return true;
-    if (text13_0(state)) // case_1
-        return true;
-    if (range14_0(state)) // case_2
-        return true;
-    if (string15_0(state)) // case_3
-        return true;
-    state.node = NodeT::NoState;
-    return true;
+
+    const uint8_t c = uint8_t(state.data[0]);
+    if (c == uint8_t('>'))
+        return text13_0(state);
+    if (c == uint8_t('/') || c == uint8_t('?'))
+    {
+        if (state.remain() < 2)
+            return range14_0(state);
+        if (uint8_t(state.data[1]) == uint8_t('>'))
+            return range14_0(state);
+        return string15_0(state);
+    }
+    return string15_0(state);
 }
 
 ALWAYS_INLINE bool xml::text13_0(StateT & state) const
@@ -1012,7 +912,9 @@ ALWAYS_INLINE bool xml::text14_1(StateT & state) const
 
 ALWAYS_INLINE bool xml::func14_2()
 {
-     return opend--; 
+    if (opend == 0)
+        return false;
+    --opend;
     return true;
 }
 ALWAYS_INLINE bool xml::func14_2(StateT & state)
@@ -1136,77 +1038,19 @@ ALWAYS_INLINE bool xml::string15_0(StateT & state)
 
 ALWAYS_INLINE bool xml::range15_1(StateT & state) const
 {
-    const static std::array<bool, 256> terminator = {
-         true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-        false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * datastart = state.data;
-    while(state.data < state.end) [[likely]]
+    while (state.data < state.end && (state.data[0] == ' ' || state.data[0] == '\t'))
+        ++state.data;
+
+    if (state.data == state.end)
     {
-        if(&state.data[16] <= state.end)
-        {
-            if (terminator[uint8_t(state.data[0])]) [[unlikely]]
-                state.data += 0;
-            else if (terminator[uint8_t(state.data[1])]) [[unlikely]]
-                state.data += 1;
-            else if (terminator[uint8_t(state.data[2])]) [[unlikely]]
-                state.data += 2;
-            else if (terminator[uint8_t(state.data[3])]) [[unlikely]]
-                state.data += 3;
-            else if (terminator[uint8_t(state.data[4])]) [[unlikely]]
-                state.data += 4;
-            else if (terminator[uint8_t(state.data[5])]) [[unlikely]]
-                state.data += 5;
-            else if (terminator[uint8_t(state.data[6])]) [[unlikely]]
-                state.data += 6;
-            else if (terminator[uint8_t(state.data[7])]) [[unlikely]]
-                state.data += 7;
-            else if (terminator[uint8_t(state.data[8])]) [[unlikely]]
-                state.data += 8;
-            else if (terminator[uint8_t(state.data[9])]) [[unlikely]]
-                state.data += 9;
-            else if (terminator[uint8_t(state.data[10])]) [[unlikely]]
-                state.data += 10;
-            else if (terminator[uint8_t(state.data[11])]) [[unlikely]]
-                state.data += 11;
-            else if (terminator[uint8_t(state.data[12])]) [[unlikely]]
-                state.data += 12;
-            else if (terminator[uint8_t(state.data[13])]) [[unlikely]]
-                state.data += 13;
-            else if (terminator[uint8_t(state.data[14])]) [[unlikely]]
-                state.data += 14;
-            else if (terminator[uint8_t(state.data[15])]) [[unlikely]]
-                state.data += 15;
-            else
-            {
-                state.data += 16;
-                continue;
-            }
-        }
-        else if (!(terminator[uint8_t(state.data[0])])) [[unlikely]]
-        {
-            state.data++;
-            continue;
-        }
-        state.consumed = 0;
-        state.node = NodeT::Text15_2;
+        state.consumed += unsigned(state.data - datastart);
+        state.node = NodeT::Range15_1;
         return true;
     }
-    state.consumed += unsigned(state.data - datastart);
-    state.node = NodeT::Range15_1;
+
+    state.consumed = 0;
+    state.node = NodeT::Text15_2;
     return true;
 }
 
@@ -1230,77 +1074,19 @@ ALWAYS_INLINE bool xml::text15_2(StateT & state) const
 
 ALWAYS_INLINE bool xml::range15_3(StateT & state) const
 {
-    const static std::array<bool, 256> terminator = {
-         true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-        false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * datastart = state.data;
-    while(state.data < state.end) [[likely]]
+    while (state.data < state.end && (state.data[0] == ' ' || state.data[0] == '\t'))
+        ++state.data;
+
+    if (state.data == state.end)
     {
-        if(&state.data[16] <= state.end)
-        {
-            if (terminator[uint8_t(state.data[0])]) [[unlikely]]
-                state.data += 0;
-            else if (terminator[uint8_t(state.data[1])]) [[unlikely]]
-                state.data += 1;
-            else if (terminator[uint8_t(state.data[2])]) [[unlikely]]
-                state.data += 2;
-            else if (terminator[uint8_t(state.data[3])]) [[unlikely]]
-                state.data += 3;
-            else if (terminator[uint8_t(state.data[4])]) [[unlikely]]
-                state.data += 4;
-            else if (terminator[uint8_t(state.data[5])]) [[unlikely]]
-                state.data += 5;
-            else if (terminator[uint8_t(state.data[6])]) [[unlikely]]
-                state.data += 6;
-            else if (terminator[uint8_t(state.data[7])]) [[unlikely]]
-                state.data += 7;
-            else if (terminator[uint8_t(state.data[8])]) [[unlikely]]
-                state.data += 8;
-            else if (terminator[uint8_t(state.data[9])]) [[unlikely]]
-                state.data += 9;
-            else if (terminator[uint8_t(state.data[10])]) [[unlikely]]
-                state.data += 10;
-            else if (terminator[uint8_t(state.data[11])]) [[unlikely]]
-                state.data += 11;
-            else if (terminator[uint8_t(state.data[12])]) [[unlikely]]
-                state.data += 12;
-            else if (terminator[uint8_t(state.data[13])]) [[unlikely]]
-                state.data += 13;
-            else if (terminator[uint8_t(state.data[14])]) [[unlikely]]
-                state.data += 14;
-            else if (terminator[uint8_t(state.data[15])]) [[unlikely]]
-                state.data += 15;
-            else
-            {
-                state.data += 16;
-                continue;
-            }
-        }
-        else if (!(terminator[uint8_t(state.data[0])])) [[unlikely]]
-        {
-            state.data++;
-            continue;
-        }
-        state.consumed = 0;
-        state.node = NodeT::Range15_4;
+        state.consumed += unsigned(state.data - datastart);
+        state.node = NodeT::Range15_3;
         return true;
     }
-    state.consumed += unsigned(state.data - datastart);
-    state.node = NodeT::Range15_3;
+
+    state.consumed = 0;
+    state.node = NodeT::Range15_4;
     return true;
 }
 
@@ -1511,77 +1297,19 @@ ALWAYS_INLINE bool xml::notify15_7(StateT & state)
 
 ALWAYS_INLINE bool xml::range15_8(StateT & state) const
 {
-    const static std::array<bool, 256> terminator = {
-         true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-        false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-         true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true}; // [0x9][0x20]
     const char * datastart = state.data;
-    while(state.data < state.end) [[likely]]
+    while (state.data < state.end && (state.data[0] == ' ' || state.data[0] == '\t'))
+        ++state.data;
+
+    if (state.data == state.end)
     {
-        if(&state.data[16] <= state.end)
-        {
-            if (terminator[uint8_t(state.data[0])]) [[unlikely]]
-                state.data += 0;
-            else if (terminator[uint8_t(state.data[1])]) [[unlikely]]
-                state.data += 1;
-            else if (terminator[uint8_t(state.data[2])]) [[unlikely]]
-                state.data += 2;
-            else if (terminator[uint8_t(state.data[3])]) [[unlikely]]
-                state.data += 3;
-            else if (terminator[uint8_t(state.data[4])]) [[unlikely]]
-                state.data += 4;
-            else if (terminator[uint8_t(state.data[5])]) [[unlikely]]
-                state.data += 5;
-            else if (terminator[uint8_t(state.data[6])]) [[unlikely]]
-                state.data += 6;
-            else if (terminator[uint8_t(state.data[7])]) [[unlikely]]
-                state.data += 7;
-            else if (terminator[uint8_t(state.data[8])]) [[unlikely]]
-                state.data += 8;
-            else if (terminator[uint8_t(state.data[9])]) [[unlikely]]
-                state.data += 9;
-            else if (terminator[uint8_t(state.data[10])]) [[unlikely]]
-                state.data += 10;
-            else if (terminator[uint8_t(state.data[11])]) [[unlikely]]
-                state.data += 11;
-            else if (terminator[uint8_t(state.data[12])]) [[unlikely]]
-                state.data += 12;
-            else if (terminator[uint8_t(state.data[13])]) [[unlikely]]
-                state.data += 13;
-            else if (terminator[uint8_t(state.data[14])]) [[unlikely]]
-                state.data += 14;
-            else if (terminator[uint8_t(state.data[15])]) [[unlikely]]
-                state.data += 15;
-            else
-            {
-                state.data += 16;
-                continue;
-            }
-        }
-        else if (!(terminator[uint8_t(state.data[0])])) [[unlikely]]
-        {
-            state.data++;
-            continue;
-        }
-        state.consumed = 0;
-        state.node = NodeT::Loop12_3;
+        state.consumed += unsigned(state.data - datastart);
+        state.node = NodeT::Range15_8;
         return true;
     }
-    state.consumed += unsigned(state.data - datastart);
-    state.node = NodeT::Range15_8;
+
+    state.consumed = 0;
+    state.node = NodeT::Loop12_3;
     return true;
 }
 

@@ -4,8 +4,7 @@
 void xmlResult::payload(__attribute__((unused)) const char * data, __attribute__((unused)) unsigned len, __attribute__((unused)) bool isFirst, __attribute__((unused)) bool isLast)
 {
     printf("\tDATA(%u)[%u_%u]: ", len, isFirst, isLast);
-    for(unsigned i = 0; i < len; i++)
-        printf("%c", data[i]);
+    std::fwrite(data, 1, len, stdout);
     printf("\n");
 }
 
