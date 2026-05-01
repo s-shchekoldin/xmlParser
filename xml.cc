@@ -1,7 +1,7 @@
 // ==============================================================
-// Date: 2026-03-30 13:41:45 GMT
-// Generated using vProto(2026.03.30)        https://www.cgen.dev
-// Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
+// Date: 2026-05-01 12:52:52 GMT
+// Generated using vProto(2026.05.01)        https://www.cgen.dev
+// Author: Sergey Shchekoldin        Email: shchekoldin@gmail.com
 // autoSSE: 1 cpp98: 0 (SSE4.2: 0 AVX2: 1 SSE2: 1)
 // ==============================================================
 
@@ -15,15 +15,24 @@
 #if defined(__SSE2__)
 #include <emmintrin.h>
 #endif
+#if !defined(ALWAYS_INLINE)
+    #if defined(_MSC_VER)
+        #define ALWAYS_INLINE __forceinline
+    #elif defined(__clang__)
+        #define ALWAYS_INLINE [[clang::always_inline]]
+    #else
+        #define ALWAYS_INLINE inline
+    #endif
+#endif
 
 #if defined(_MSC_VER)
 #include <intrin.h>
-inline unsigned __ctz32(uint32_t x) { return _tzcnt_u32(x); }
+ALWAYS_INLINE unsigned __ctz32(uint32_t x) { return _tzcnt_u32(x); }
 #else
-inline unsigned __ctz32(uint32_t x) { return __builtin_ctz(x); }
+ALWAYS_INLINE unsigned __ctz32(uint32_t x) { return __builtin_ctz(x); }
 #endif
 
-inline void xml::parse(StateT & state)
+void xml::parse(StateT & state)
 {
     while(true)
     {
@@ -100,18 +109,18 @@ bool xml::parse(const char * data, unsigned len)
     return !empty();
 }
 
-inline bool xml::loop1_0(StateT & state) const
+ALWAYS_INLINE bool xml::loop1_0(StateT & state) const
 {
     return label1_0(state);
 }
 
-inline bool xml::label1_0(StateT & state) const
+ALWAYS_INLINE bool xml::label1_0(StateT & state) const
 {
     state.node = NodeT::Loop1_1;
     return true;
 }
 
-inline bool xml::loop1_1(StateT & state)
+ALWAYS_INLINE bool xml::loop1_1(StateT & state)
 {
     if (state.data == state.end)
         return true;
@@ -127,7 +136,7 @@ inline bool xml::loop1_1(StateT & state)
     return true;
 }
 
-inline bool xml::range2_0(StateT & state) const
+ALWAYS_INLINE bool xml::range2_0(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true, false,  true,  true, 
@@ -210,7 +219,7 @@ inline bool xml::range2_0(StateT & state) const
     return true;
 }
 
-inline bool xml::range3_0(StateT & state) const
+ALWAYS_INLINE bool xml::range3_0(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -293,7 +302,7 @@ inline bool xml::range3_0(StateT & state) const
     return true;
 }
 
-inline bool xml::text4_0(StateT & state) const
+ALWAYS_INLINE bool xml::text4_0(StateT & state) const
 {
     if(state.data < state.end)
     {
@@ -311,7 +320,7 @@ inline bool xml::text4_0(StateT & state) const
     return true;
 }
 
-inline bool xml::call4_1(StateT & state) const
+ALWAYS_INLINE bool xml::call4_1(StateT & state) const
 {
     state.node = NodeT::Label7_0;
     if (state.rcount < state.rstack.size())
@@ -325,7 +334,7 @@ inline bool xml::call4_1(StateT & state) const
     return true;
 }
 
-inline bool xml::range5_0(StateT & state)
+ALWAYS_INLINE bool xml::range5_0(StateT & state)
 {
     const char * datastart = state.data;
     while(state.data < state.end) [[likely]]
@@ -394,18 +403,18 @@ inline bool xml::range5_0(StateT & state)
     return true;
 }
 
-inline bool xml::loop7_0(StateT & state) const
+ALWAYS_INLINE bool xml::loop7_0(StateT & state) const
 {
     return label7_0(state);
 }
 
-inline bool xml::label7_0(StateT & state) const
+ALWAYS_INLINE bool xml::label7_0(StateT & state) const
 {
     state.node = NodeT::Loop7_1;
     return true;
 }
 
-inline bool xml::loop7_1(StateT & state)
+ALWAYS_INLINE bool xml::loop7_1(StateT & state)
 {
     if (state.data == state.end)
         return true;
@@ -419,7 +428,7 @@ inline bool xml::loop7_1(StateT & state)
     return true;
 }
 
-inline bool xml::text8_0(StateT & state, bool is_branch) const
+ALWAYS_INLINE bool xml::text8_0(StateT & state, bool is_branch) const
 {
     const static std::array<uint8_t, 3> text = {0x21, 0x2d, 0x2d}; // !--
     for(; state.data < state.end; state.data++)
@@ -443,7 +452,7 @@ inline bool xml::text8_0(StateT & state, bool is_branch) const
     return true;
 }
 
-inline bool xml::loop8_1(StateT & state) const
+ALWAYS_INLINE bool xml::loop8_1(StateT & state) const
 {
     if (state.data == state.end)
         return true;
@@ -453,7 +462,7 @@ inline bool xml::loop8_1(StateT & state) const
     return true;
 }
 
-inline bool xml::text9_0(StateT & state, bool is_branch) const
+ALWAYS_INLINE bool xml::text9_0(StateT & state, bool is_branch) const
 {
     const static std::array<uint8_t, 3> text = {0x2d, 0x2d, 0x3e}; // -->
     for(; state.data < state.end; state.data++)
@@ -477,13 +486,13 @@ inline bool xml::text9_0(StateT & state, bool is_branch) const
     return true;
 }
 
-inline bool xml::ret9_1(StateT & state) const
+ALWAYS_INLINE bool xml::ret9_1(StateT & state) const
 {
     state.node = state.rcount ? state.rstack[--state.rcount] : NodeT::NoState;
     return state.node != NodeT::NoState;
 }
 
-inline bool xml::range10_0(StateT & state) const
+ALWAYS_INLINE bool xml::range10_0(StateT & state) const
 {
     const char * datastart = state.data;
     while(state.data < state.end) [[likely]]
@@ -542,7 +551,7 @@ inline bool xml::range10_0(StateT & state) const
     return true;
 }
 
-inline bool xml::text11_0(StateT & state) const
+ALWAYS_INLINE bool xml::text11_0(StateT & state) const
 {
     if(state.data < state.end)
     {
@@ -569,7 +578,7 @@ void xml::string11_1(const char * data, unsigned len, uint64_t consumed)
     xmlResult::tag.append(data, len);
 }
 
-inline bool xml::string11_1(StateT & state)
+ALWAYS_INLINE bool xml::string11_1(StateT & state)
 {
     const char * datastart = state.data;
     while(state.data < state.end) [[likely]]
@@ -668,7 +677,7 @@ inline bool xml::string11_1(StateT & state)
     return true;
 }
 
-inline bool xml::range11_2(StateT & state) const
+ALWAYS_INLINE bool xml::range11_2(StateT & state) const
 {
     const char * datastart = state.data;
     while(state.data < state.end)
@@ -690,12 +699,12 @@ inline bool xml::range11_2(StateT & state) const
     return true;
 }
 
-inline bool xml::func11_3()
+ALWAYS_INLINE bool xml::func11_3()
 {
      return opend--; 
     return true;
 }
-inline bool xml::func11_3(StateT & state)
+ALWAYS_INLINE bool xml::func11_3(StateT & state)
 {
     if (func11_3())
     {
@@ -706,14 +715,14 @@ inline bool xml::func11_3(StateT & state)
     return false;
 }
 
-inline bool xml::notify11_4(StateT & state)
+ALWAYS_INLINE bool xml::notify11_4(StateT & state)
 {
     finishTag();
     state.node = NodeT::Ret11_5;
     return true;
 }
 
-inline bool xml::ret11_5(StateT & state) const
+ALWAYS_INLINE bool xml::ret11_5(StateT & state) const
 {
     state.node = state.rcount ? state.rstack[--state.rcount] : NodeT::NoState;
     return state.node != NodeT::NoState;
@@ -728,7 +737,7 @@ void xml::string12_0(const char * data, unsigned len, uint64_t consumed)
     xmlResult::tag.append(data, len);
 }
 
-inline bool xml::string12_0(StateT & state)
+ALWAYS_INLINE bool xml::string12_0(StateT & state)
 {
     const static std::array<bool, 256> terminator = {
         false, false, false, false, false, false, false, false, false,  true, false, false, false, false, false, false, 
@@ -814,12 +823,12 @@ inline bool xml::string12_0(StateT & state)
     return true;
 }
 
-inline bool xml::func12_1()
+ALWAYS_INLINE bool xml::func12_1()
 {
      opend++; 
     return true;
 }
-inline bool xml::func12_1(StateT & state)
+ALWAYS_INLINE bool xml::func12_1(StateT & state)
 {
     if (func12_1())
     {
@@ -830,7 +839,7 @@ inline bool xml::func12_1(StateT & state)
     return false;
 }
 
-inline bool xml::range12_2(StateT & state) const
+ALWAYS_INLINE bool xml::range12_2(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -906,7 +915,7 @@ inline bool xml::range12_2(StateT & state) const
     return true;
 }
 
-inline bool xml::loop12_3(StateT & state)
+ALWAYS_INLINE bool xml::loop12_3(StateT & state)
 {
     if (state.data == state.end)
         return true;
@@ -920,7 +929,7 @@ inline bool xml::loop12_3(StateT & state)
     return true;
 }
 
-inline bool xml::text13_0(StateT & state) const
+ALWAYS_INLINE bool xml::text13_0(StateT & state) const
 {
     if(state.data < state.end)
     {
@@ -938,13 +947,13 @@ inline bool xml::text13_0(StateT & state) const
     return true;
 }
 
-inline bool xml::ret13_1(StateT & state) const
+ALWAYS_INLINE bool xml::ret13_1(StateT & state) const
 {
     state.node = state.rcount ? state.rstack[--state.rcount] : NodeT::NoState;
     return state.node != NodeT::NoState;
 }
 
-inline bool xml::range14_0(StateT & state) const
+ALWAYS_INLINE bool xml::range14_0(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -983,7 +992,7 @@ inline bool xml::range14_0(StateT & state) const
     return true;
 }
 
-inline bool xml::text14_1(StateT & state) const
+ALWAYS_INLINE bool xml::text14_1(StateT & state) const
 {
     if(state.data < state.end)
     {
@@ -1001,12 +1010,12 @@ inline bool xml::text14_1(StateT & state) const
     return true;
 }
 
-inline bool xml::func14_2()
+ALWAYS_INLINE bool xml::func14_2()
 {
      return opend--; 
     return true;
 }
-inline bool xml::func14_2(StateT & state)
+ALWAYS_INLINE bool xml::func14_2(StateT & state)
 {
     if (func14_2())
     {
@@ -1017,14 +1026,14 @@ inline bool xml::func14_2(StateT & state)
     return false;
 }
 
-inline bool xml::notify14_3(StateT & state)
+ALWAYS_INLINE bool xml::notify14_3(StateT & state)
 {
     finishTag();
     state.node = NodeT::Ret14_4;
     return true;
 }
 
-inline bool xml::ret14_4(StateT & state) const
+ALWAYS_INLINE bool xml::ret14_4(StateT & state) const
 {
     state.node = state.rcount ? state.rstack[--state.rcount] : NodeT::NoState;
     return state.node != NodeT::NoState;
@@ -1039,7 +1048,7 @@ void xml::string15_0(const char * data, unsigned len, uint64_t consumed)
     xmlResult::key.append(data, len);
 }
 
-inline bool xml::string15_0(StateT & state)
+ALWAYS_INLINE bool xml::string15_0(StateT & state)
 {
     const static std::array<bool, 256> terminator = {
         false, false, false, false, false, false, false, false, false,  true, false, false, false, false, false, false, 
@@ -1125,7 +1134,7 @@ inline bool xml::string15_0(StateT & state)
     return true;
 }
 
-inline bool xml::range15_1(StateT & state) const
+ALWAYS_INLINE bool xml::range15_1(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -1201,7 +1210,7 @@ inline bool xml::range15_1(StateT & state) const
     return true;
 }
 
-inline bool xml::text15_2(StateT & state) const
+ALWAYS_INLINE bool xml::text15_2(StateT & state) const
 {
     if(state.data < state.end)
     {
@@ -1219,7 +1228,7 @@ inline bool xml::text15_2(StateT & state) const
     return true;
 }
 
-inline bool xml::range15_3(StateT & state) const
+ALWAYS_INLINE bool xml::range15_3(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -1295,7 +1304,7 @@ inline bool xml::range15_3(StateT & state) const
     return true;
 }
 
-inline bool xml::range15_4(StateT & state) const
+ALWAYS_INLINE bool xml::range15_4(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1343,7 +1352,7 @@ void xml::string15_5(const char * data, unsigned len, uint64_t consumed)
     xmlResult::value.append(data, len);
 }
 
-inline bool xml::string15_5(StateT & state)
+ALWAYS_INLINE bool xml::string15_5(StateT & state)
 {
     const static std::array<bool, 256> terminator = {
         false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
@@ -1454,7 +1463,7 @@ inline bool xml::string15_5(StateT & state)
     return true;
 }
 
-inline bool xml::range15_6(StateT & state) const
+ALWAYS_INLINE bool xml::range15_6(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
@@ -1493,14 +1502,14 @@ inline bool xml::range15_6(StateT & state) const
     return true;
 }
 
-inline bool xml::notify15_7(StateT & state)
+ALWAYS_INLINE bool xml::notify15_7(StateT & state)
 {
     getAttribute();
     state.node = NodeT::Range15_8;
     return true;
 }
 
-inline bool xml::range15_8(StateT & state) const
+ALWAYS_INLINE bool xml::range15_8(StateT & state) const
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
@@ -1576,7 +1585,7 @@ inline bool xml::range15_8(StateT & state) const
     return true;
 }
 
-inline bool xml::loop17_0(StateT & state)
+ALWAYS_INLINE bool xml::loop17_0(StateT & state)
 {
     return uint17_0(state);
 }
@@ -1589,7 +1598,7 @@ void xml::uint17_0(const char * data, unsigned len, uint64_t consumed)
         xmlResult::opend = xmlResult::opend*10 + *data - '0';
 }
 
-inline bool xml::uint17_0(StateT & state)
+ALWAYS_INLINE bool xml::uint17_0(StateT & state)
 {
     const static std::array<bool, 256> terminator = {
          true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 

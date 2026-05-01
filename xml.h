@@ -1,7 +1,7 @@
 // ==============================================================
-// Date: 2026-03-30 13:41:45 GMT
-// Generated using vProto(2026.03.30)        https://www.cgen.dev
-// Author: Sergey V. Shchekoldin     Email: shchekoldin@gmail.com
+// Date: 2026-05-01 12:52:52 GMT
+// Generated using vProto(2026.05.01)        https://www.cgen.dev
+// Author: Sergey Shchekoldin        Email: shchekoldin@gmail.com
 // ==============================================================
 
 #ifndef XML_H
