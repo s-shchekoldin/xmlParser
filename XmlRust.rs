@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2026-05-01 12:55:13 GMT
-// Generated using vProto(2026.05.01)        https://www.cgen.dev
+// Date: 2026-05-06 08:57:59 GMT
+// Generated using vProto(2026.05.06)        https://www.cgen.dev
 // Author: Sergey Shchekoldin        Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -315,48 +315,31 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return true;
     }
     #[inline(always)] fn range2_0(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true, false,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0xa][0xd]
         let datastart = state.pos;
         while state.pos < data.len() {
             if (state.pos + 8) <= data.len() {
-                if TERMINATOR[usize::from(data[state.pos])] {
+                if data[state.pos] != 0x0a && data[state.pos] != 0x0d {
                     state.pos += 0;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 1])] {
+                else if data[state.pos + 1] != 0x0a && data[state.pos + 1] != 0x0d {
                     state.pos += 1;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 2])] {
+                else if data[state.pos + 2] != 0x0a && data[state.pos + 2] != 0x0d {
                     state.pos += 2;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 3])] {
+                else if data[state.pos + 3] != 0x0a && data[state.pos + 3] != 0x0d {
                     state.pos += 3;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 4])] {
+                else if data[state.pos + 4] != 0x0a && data[state.pos + 4] != 0x0d {
                     state.pos += 4;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 5])] {
+                else if data[state.pos + 5] != 0x0a && data[state.pos + 5] != 0x0d {
                     state.pos += 5;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 6])] {
+                else if data[state.pos + 6] != 0x0a && data[state.pos + 6] != 0x0d {
                     state.pos += 6;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 7])] {
+                else if data[state.pos + 7] != 0x0a && data[state.pos + 7] != 0x0d {
                     state.pos += 7;
                 }
                 else
@@ -365,7 +348,7 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     continue;
                 }
             }
-            else if !(TERMINATOR[usize::from(data[state.pos])]) {
+            else if !(data[state.pos] != 0x0a && data[state.pos] != 0x0d) {
                 state.pos += 1;
                 continue;
             }
@@ -384,48 +367,31 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return true;
     }
     #[inline(always)] fn range3_0(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-            false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x9][0x20]
         let datastart = state.pos;
         while state.pos < data.len() {
             if (state.pos + 8) <= data.len() {
-                if TERMINATOR[usize::from(data[state.pos])] {
+                if data[state.pos] != 0x09 && data[state.pos] != 0x20 {
                     state.pos += 0;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 1])] {
+                else if data[state.pos + 1] != 0x09 && data[state.pos + 1] != 0x20 {
                     state.pos += 1;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 2])] {
+                else if data[state.pos + 2] != 0x09 && data[state.pos + 2] != 0x20 {
                     state.pos += 2;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 3])] {
+                else if data[state.pos + 3] != 0x09 && data[state.pos + 3] != 0x20 {
                     state.pos += 3;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 4])] {
+                else if data[state.pos + 4] != 0x09 && data[state.pos + 4] != 0x20 {
                     state.pos += 4;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 5])] {
+                else if data[state.pos + 5] != 0x09 && data[state.pos + 5] != 0x20 {
                     state.pos += 5;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 6])] {
+                else if data[state.pos + 6] != 0x09 && data[state.pos + 6] != 0x20 {
                     state.pos += 6;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 7])] {
+                else if data[state.pos + 7] != 0x09 && data[state.pos + 7] != 0x20 {
                     state.pos += 7;
                 }
                 else
@@ -434,7 +400,7 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     continue;
                 }
             }
-            else if !(TERMINATOR[usize::from(data[state.pos])]) {
+            else if !(data[state.pos] != 0x09 && data[state.pos] != 0x20) {
                 state.pos += 1;
                 continue;
             }
@@ -905,48 +871,31 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return false;
     }
     #[inline(always)] fn range12_2(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-            false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x9][0x20]
         let datastart = state.pos;
         while state.pos < data.len() {
             if (state.pos + 8) <= data.len() {
-                if TERMINATOR[usize::from(data[state.pos])] {
+                if data[state.pos] != 0x09 && data[state.pos] != 0x20 {
                     state.pos += 0;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 1])] {
+                else if data[state.pos + 1] != 0x09 && data[state.pos + 1] != 0x20 {
                     state.pos += 1;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 2])] {
+                else if data[state.pos + 2] != 0x09 && data[state.pos + 2] != 0x20 {
                     state.pos += 2;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 3])] {
+                else if data[state.pos + 3] != 0x09 && data[state.pos + 3] != 0x20 {
                     state.pos += 3;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 4])] {
+                else if data[state.pos + 4] != 0x09 && data[state.pos + 4] != 0x20 {
                     state.pos += 4;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 5])] {
+                else if data[state.pos + 5] != 0x09 && data[state.pos + 5] != 0x20 {
                     state.pos += 5;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 6])] {
+                else if data[state.pos + 6] != 0x09 && data[state.pos + 6] != 0x20 {
                     state.pos += 6;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 7])] {
+                else if data[state.pos + 7] != 0x09 && data[state.pos + 7] != 0x20 {
                     state.pos += 7;
                 }
                 else
@@ -955,7 +904,7 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     continue;
                 }
             }
-            else if !(TERMINATOR[usize::from(data[state.pos])]) {
+            else if !(data[state.pos] != 0x09 && data[state.pos] != 0x20) {
                 state.pos += 1;
                 continue;
             }
@@ -1007,26 +956,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return state.node != NodeT::NoState;
     }
     #[inline(always)] fn range14_0(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, false, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x2f][0x3f]
         let datastart = state.pos;
         while state.pos < data.len() {
-            if TERMINATOR[usize::from(data[state.pos])] {
+            if data[state.pos] != 0x2f && data[state.pos] != 0x3f {
                 state.consumed += state.pos - datastart;
                 state.node = if state.consumed >= 1 { NodeT::Text14_1 } else { NodeT::NoState };
                 let ret = state.node == NodeT::Text14_1;
@@ -1160,48 +1092,31 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return true;
     }
     #[inline(always)] fn range15_1(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-            false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x9][0x20]
         let datastart = state.pos;
         while state.pos < data.len() {
             if (state.pos + 8) <= data.len() {
-                if TERMINATOR[usize::from(data[state.pos])] {
+                if data[state.pos] != 0x09 && data[state.pos] != 0x20 {
                     state.pos += 0;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 1])] {
+                else if data[state.pos + 1] != 0x09 && data[state.pos + 1] != 0x20 {
                     state.pos += 1;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 2])] {
+                else if data[state.pos + 2] != 0x09 && data[state.pos + 2] != 0x20 {
                     state.pos += 2;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 3])] {
+                else if data[state.pos + 3] != 0x09 && data[state.pos + 3] != 0x20 {
                     state.pos += 3;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 4])] {
+                else if data[state.pos + 4] != 0x09 && data[state.pos + 4] != 0x20 {
                     state.pos += 4;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 5])] {
+                else if data[state.pos + 5] != 0x09 && data[state.pos + 5] != 0x20 {
                     state.pos += 5;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 6])] {
+                else if data[state.pos + 6] != 0x09 && data[state.pos + 6] != 0x20 {
                     state.pos += 6;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 7])] {
+                else if data[state.pos + 7] != 0x09 && data[state.pos + 7] != 0x20 {
                     state.pos += 7;
                 }
                 else
@@ -1210,7 +1125,7 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     continue;
                 }
             }
-            else if !(TERMINATOR[usize::from(data[state.pos])]) {
+            else if !(data[state.pos] != 0x09 && data[state.pos] != 0x20) {
                 state.pos += 1;
                 continue;
             }
@@ -1237,48 +1152,31 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return true;
     }
     #[inline(always)] fn range15_3(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-            false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x9][0x20]
         let datastart = state.pos;
         while state.pos < data.len() {
             if (state.pos + 8) <= data.len() {
-                if TERMINATOR[usize::from(data[state.pos])] {
+                if data[state.pos] != 0x09 && data[state.pos] != 0x20 {
                     state.pos += 0;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 1])] {
+                else if data[state.pos + 1] != 0x09 && data[state.pos + 1] != 0x20 {
                     state.pos += 1;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 2])] {
+                else if data[state.pos + 2] != 0x09 && data[state.pos + 2] != 0x20 {
                     state.pos += 2;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 3])] {
+                else if data[state.pos + 3] != 0x09 && data[state.pos + 3] != 0x20 {
                     state.pos += 3;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 4])] {
+                else if data[state.pos + 4] != 0x09 && data[state.pos + 4] != 0x20 {
                     state.pos += 4;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 5])] {
+                else if data[state.pos + 5] != 0x09 && data[state.pos + 5] != 0x20 {
                     state.pos += 5;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 6])] {
+                else if data[state.pos + 6] != 0x09 && data[state.pos + 6] != 0x20 {
                     state.pos += 6;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 7])] {
+                else if data[state.pos + 7] != 0x09 && data[state.pos + 7] != 0x20 {
                     state.pos += 7;
                 }
                 else
@@ -1287,7 +1185,7 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     continue;
                 }
             }
-            else if !(TERMINATOR[usize::from(data[state.pos])]) {
+            else if !(data[state.pos] != 0x09 && data[state.pos] != 0x20) {
                 state.pos += 1;
                 continue;
             }
@@ -1300,26 +1198,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return true;
     }
     #[inline(always)] fn range15_4(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true, false,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x22][0x27]
         let datastart = state.pos;
         while state.pos < data.len() {
-            if TERMINATOR[usize::from(data[state.pos])] {
+            if data[state.pos] != 0x22 && data[state.pos] != 0x27 {
                 state.consumed += state.pos - datastart;
                 state.node = if state.consumed >= 1 { NodeT::String15_5 } else { NodeT::NoState };
                 let ret = state.node == NodeT::String15_5;
@@ -1342,23 +1223,6 @@ impl <T: XmlRustTrait> XmlRust<T> {
         self.output.value().push_str(&String::from_utf8_lossy(&data[0 .. len]));
     }
     #[inline(always)] fn string15_5(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false,  true, false, false, false, false,  true, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, 
-            false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]; // ^[0x22][0x27]
         let datastart = state.pos;
         let is_avx2 = is_x86_feature_detected!("avx2");
         let is_sse2 = is_x86_feature_detected!("sse2");
@@ -1392,28 +1256,28 @@ impl <T: XmlRustTrait> XmlRust<T> {
                 }
             }
             else if (state.pos + 8) <= data.len() {
-                if TERMINATOR[usize::from(data[state.pos])] {
+                if data[state.pos] == 0x22 || data[state.pos] == 0x27 {
                     state.pos += 0;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 1])] {
+                else if data[state.pos + 1] == 0x22 || data[state.pos + 1] == 0x27 {
                     state.pos += 1;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 2])] {
+                else if data[state.pos + 2] == 0x22 || data[state.pos + 2] == 0x27 {
                     state.pos += 2;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 3])] {
+                else if data[state.pos + 3] == 0x22 || data[state.pos + 3] == 0x27 {
                     state.pos += 3;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 4])] {
+                else if data[state.pos + 4] == 0x22 || data[state.pos + 4] == 0x27 {
                     state.pos += 4;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 5])] {
+                else if data[state.pos + 5] == 0x22 || data[state.pos + 5] == 0x27 {
                     state.pos += 5;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 6])] {
+                else if data[state.pos + 6] == 0x22 || data[state.pos + 6] == 0x27 {
                     state.pos += 6;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 7])] {
+                else if data[state.pos + 7] == 0x22 || data[state.pos + 7] == 0x27 {
                     state.pos += 7;
                 }
                 else
@@ -1422,7 +1286,7 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     continue;
                 }
             }
-            else if !(TERMINATOR[usize::from(data[state.pos])]) {
+            else if !(data[state.pos] == 0x22 || data[state.pos] == 0x27) {
                 state.pos += 1;
                 continue;
             }
@@ -1441,26 +1305,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return true;
     }
     #[inline(always)] fn range15_6(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true, false,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x22][0x27]
         let datastart = state.pos;
         while state.pos < data.len() {
-            if TERMINATOR[usize::from(data[state.pos])] {
+            if data[state.pos] != 0x22 && data[state.pos] != 0x27 {
                 state.consumed += state.pos - datastart;
                 state.node = if state.consumed >= 1 { NodeT::Notify15_7 } else { NodeT::NoState };
                 let ret = state.node == NodeT::Notify15_7;
@@ -1481,48 +1328,31 @@ impl <T: XmlRustTrait> XmlRust<T> {
         return true;
     }
     #[inline(always)] fn range15_8(&mut self, state: &mut StateT, data: &[u8]) -> bool {
-        static TERMINATOR:[bool;256] = [
-             true,  true,  true,  true,  true,  true,  true,  true,  true, false,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-            false,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true, 
-             true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true,  true]; // [0x9][0x20]
         let datastart = state.pos;
         while state.pos < data.len() {
             if (state.pos + 8) <= data.len() {
-                if TERMINATOR[usize::from(data[state.pos])] {
+                if data[state.pos] != 0x09 && data[state.pos] != 0x20 {
                     state.pos += 0;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 1])] {
+                else if data[state.pos + 1] != 0x09 && data[state.pos + 1] != 0x20 {
                     state.pos += 1;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 2])] {
+                else if data[state.pos + 2] != 0x09 && data[state.pos + 2] != 0x20 {
                     state.pos += 2;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 3])] {
+                else if data[state.pos + 3] != 0x09 && data[state.pos + 3] != 0x20 {
                     state.pos += 3;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 4])] {
+                else if data[state.pos + 4] != 0x09 && data[state.pos + 4] != 0x20 {
                     state.pos += 4;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 5])] {
+                else if data[state.pos + 5] != 0x09 && data[state.pos + 5] != 0x20 {
                     state.pos += 5;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 6])] {
+                else if data[state.pos + 6] != 0x09 && data[state.pos + 6] != 0x20 {
                     state.pos += 6;
                 }
-                else if TERMINATOR[usize::from(data[state.pos + 7])] {
+                else if data[state.pos + 7] != 0x09 && data[state.pos + 7] != 0x20 {
                     state.pos += 7;
                 }
                 else
@@ -1531,7 +1361,7 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     continue;
                 }
             }
-            else if !(TERMINATOR[usize::from(data[state.pos])]) {
+            else if !(data[state.pos] != 0x09 && data[state.pos] != 0x20) {
                 state.pos += 1;
                 continue;
             }
