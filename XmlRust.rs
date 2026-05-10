@@ -1,6 +1,6 @@
 // ==============================================================
-// Date: 2026-05-06 08:57:59 GMT
-// Generated using vProto(2026.05.06)        https://www.cgen.dev
+// Date: 2026-05-10 21:07:38 GMT
+// Generated using vProto(2026.05.10)        https://www.cgen.dev
 // Author: Sergey Shchekoldin        Email: shchekoldin@gmail.com
 // ==============================================================
 
@@ -357,10 +357,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
             if total >= 1 {
                 state.node = NodeT::Loop1_1;
                 return true;
-            } else {
-                state.node = NodeT::NoState;
-                return false;
             }
+            state.node = NodeT::NoState;
+            return false;
         }
         state.consumed += state.pos - datastart;
         state.node = NodeT::Range2_0;
@@ -409,10 +408,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
             if total >= 1 {
                 state.node = NodeT::Loop1_1;
                 return true;
-            } else {
-                state.node = NodeT::NoState;
-                return false;
             }
+            state.node = NodeT::NoState;
+            return false;
         }
         state.consumed += state.pos - datastart;
         state.node = NodeT::Range3_0;
@@ -492,10 +490,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
             if total >= 1 {
                 state.node = NodeT::Loop1_1;
                 return true;
-            } else {
-                state.node = NodeT::NoState;
-                return false;
             }
+            state.node = NodeT::NoState;
+            return false;
         }
         if datastart < state.pos {
             let pos = state.pos;
@@ -656,36 +653,56 @@ impl <T: XmlRustTrait> XmlRust<T> {
     }
     #[inline(always)] fn string11_1(&mut self, state: &mut StateT, data: &[u8]) -> bool {
         let datastart = state.pos;
-        let is_avx2 = is_x86_feature_detected!("avx2");
-        let is_sse2 = is_x86_feature_detected!("sse2");
-        while state.pos < data.len() {
-            if is_avx2 && (state.pos + 32) <= data.len() {
+        if is_x86_feature_detected!("avx2") {
+            while (state.pos + 32) <= data.len() {
                 unsafe {
                     let d = _mm256_lddqu_si256(data.as_ptr().add(state.pos) as *const __m256i);
                     let m = _mm256_cmpeq_epi8(_mm256_set1_epi8(0x3e), d);
                     let r: u32 = _mm256_movemask_epi8(m) as u32;
                     if r > 0 {
                         state.pos += r.trailing_zeros() as usize;
+                        let pos = state.pos;
+                        self._string11_1(state, &data[datastart .. pos]);
+                        let total = state.consumed + state.pos - datastart;
+                        state.consumed = 0;
+                        if total >= 1 {
+                            state.node = NodeT::Range11_2;
+                            return true;
+                        }
+                        state.node = NodeT::NoState;
+                        return false;
                     } else {
                         state.pos += 32;
-                        continue;
                     }
                 }
             }
-            else if is_sse2 && (state.pos + 16) <= data.len() {
+        }
+        if is_x86_feature_detected!("sse2") {
+            while (state.pos + 16) <= data.len() {
                 unsafe {
                     let d = _mm_loadu_si128(data.as_ptr().add(state.pos) as *const __m128i);
                     let m = _mm_cmpeq_epi8(_mm_set1_epi8(0x3e), d);
                     let r: u16 = _mm_movemask_epi8(m) as u16;
                     if r > 0 {
                         state.pos += r.trailing_zeros() as usize;
+                        let pos = state.pos;
+                        self._string11_1(state, &data[datastart .. pos]);
+                        let total = state.consumed + state.pos - datastart;
+                        state.consumed = 0;
+                        if total >= 1 {
+                            state.node = NodeT::Range11_2;
+                            return true;
+                        }
+                        state.node = NodeT::NoState;
+                        return false;
                     } else {
                         state.pos += 16;
-                        continue;
                     }
                 }
             }
-            else if (state.pos + 8) <= data.len() {
+        }
+        while state.pos < data.len() {
+            if (state.pos + 8) <= data.len() {
                 if data[state.pos] == 0x3e {
                     state.pos += 0;
                 }
@@ -727,10 +744,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
             if total >= 1 {
                 state.node = NodeT::Range11_2;
                 return true;
-            } else {
-                state.node = NodeT::NoState;
-                return false;
             }
+            state.node = NodeT::NoState;
+            return false;
         }
         if datastart < state.pos {
             let pos = state.pos;
@@ -849,10 +865,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
             if total >= 1 {
                 state.node = NodeT::Func12_1;
                 return true;
-            } else {
-                state.node = NodeT::NoState;
-                return false;
             }
+            state.node = NodeT::NoState;
+            return false;
         }
         if datastart < state.pos {
             let pos = state.pos;
@@ -1078,10 +1093,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
             if total >= 1 {
                 state.node = NodeT::Range15_1;
                 return true;
-            } else {
-                state.node = NodeT::NoState;
-                return false;
             }
+            state.node = NodeT::NoState;
+            return false;
         }
         if datastart < state.pos {
             let pos = state.pos;
@@ -1224,10 +1238,8 @@ impl <T: XmlRustTrait> XmlRust<T> {
     }
     #[inline(always)] fn string15_5(&mut self, state: &mut StateT, data: &[u8]) -> bool {
         let datastart = state.pos;
-        let is_avx2 = is_x86_feature_detected!("avx2");
-        let is_sse2 = is_x86_feature_detected!("sse2");
-        while state.pos < data.len() {
-            if is_avx2 && (state.pos + 32) <= data.len() {
+        if is_x86_feature_detected!("avx2") {
+            while (state.pos + 32) <= data.len() {
                 unsafe {
                     let d = _mm256_lddqu_si256(data.as_ptr().add(state.pos) as *const __m256i);
                     let mut m = _mm256_cmpeq_epi8(_mm256_set1_epi8(0x22), d);
@@ -1235,13 +1247,19 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     let r: u32 = _mm256_movemask_epi8(m) as u32;
                     if r > 0 {
                         state.pos += r.trailing_zeros() as usize;
+                        let pos = state.pos;
+                        self._string15_5(state, &data[datastart .. pos]);
+                        state.consumed = 0;
+                        state.node = NodeT::Range15_6;
+                        return true;
                     } else {
                         state.pos += 32;
-                        continue;
                     }
                 }
             }
-            else if is_sse2 && (state.pos + 16) <= data.len() {
+        }
+        if is_x86_feature_detected!("sse2") {
+            while (state.pos + 16) <= data.len() {
                 unsafe {
                     let d = _mm_loadu_si128(data.as_ptr().add(state.pos) as *const __m128i);
                     let mut m = _mm_cmpeq_epi8(_mm_set1_epi8(0x22), d);
@@ -1249,13 +1267,19 @@ impl <T: XmlRustTrait> XmlRust<T> {
                     let r: u16 = _mm_movemask_epi8(m) as u16;
                     if r > 0 {
                         state.pos += r.trailing_zeros() as usize;
+                        let pos = state.pos;
+                        self._string15_5(state, &data[datastart .. pos]);
+                        state.consumed = 0;
+                        state.node = NodeT::Range15_6;
+                        return true;
                     } else {
                         state.pos += 16;
-                        continue;
                     }
                 }
             }
-            else if (state.pos + 8) <= data.len() {
+        }
+        while state.pos < data.len() {
+            if (state.pos + 8) <= data.len() {
                 if data[state.pos] == 0x22 || data[state.pos] == 0x27 {
                     state.pos += 0;
                 }
@@ -1446,10 +1470,9 @@ impl <T: XmlRustTrait> XmlRust<T> {
             if total >= 1 {
                 state.node = NodeT::Loop17_0;
                 return true;
-            } else {
-                state.node = NodeT::NoState;
-                return false;
             }
+            state.node = NodeT::NoState;
+            return false;
         }
         if datastart < state.pos {
             let pos = state.pos;
